@@ -1,0 +1,1 @@
+var base_url="http://localhost:8080/ProjectAntrian/API/public/api/v1/";

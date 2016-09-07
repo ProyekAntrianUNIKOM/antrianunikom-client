@@ -13,9 +13,11 @@
     src: url('../font/Lobster.otf');
 }
 
+
 .flex {
 	display: flex;
 	display: -webkit-flex;
+    display: -moz-flex;
 }
 
 .bor {
@@ -318,11 +320,6 @@ html, body {
     flex-direction: row;
 }
 
-#slider img {
-    width: 100%;
-    height: 100%;
-}
-
 .menu-utama {
     height: 80%;
     width: 40%;
@@ -351,6 +348,67 @@ html, body {
 
 #bg-main #bg-row a span {
     width: 75%;
+}
+
+.login #bg-main #bg-row {
+    font-family: 'Montserrat-Regular';
+    width: 60%;
+    flex-direction: column;
+}
+
+.login #bg-main #bg-row #header, .login #bg-main #bg-row #main, .login #bg-main #bg-row #footer {
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.login #bg-main #bg-row #header {
+    height: 30%;
+    background: #fff;
+    font-size: 40px;
+}
+
+.login #bg-main #bg-row #main {
+    height: 50%;
+    background: #fff;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.login #bg-main #bg-row #main table tr {
+    font-size: 20px;
+}
+
+.login #bg-main #bg-row #main table tr input {
+    border-style: none;
+    outline-style: none;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    transition: height 0.3s;
+} 
+
+.login #bg-main #bg-row #main table tr td{
+    padding: 15px;
+}
+
+.login #bg-main #bg-row #main #error {
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.login #bg-main #bg-row #footer {
+    height: 20%;
+}
+
+.login #bg-main #bg-row #footer input[type="button"] {
+    height: 100%;
+    width: 100%;
+    background: #2d2e2e;
+    border-style: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 #bg-main #back {
@@ -405,7 +463,7 @@ html, body {
     display: none;
     z-index: 1;
     position: absolute;
-    top:0; 
+    top: 0;
     background: rgba(0,0,0,0);
     height: 100%;
     width: 100%;
@@ -422,12 +480,15 @@ html, body {
     position: absolute;
     margin: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-
+    
     -webkit-animation-name: muncul;
     -webkit-animation-duration: 0.3s;
     -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
     animation-name: muncul;
-    animation-duration: 0.3s
+    animation-duration: 0.3s;
     animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
 }
 
@@ -462,13 +523,16 @@ html, body {
     -webkit-animation-name: muncul-text;
     -webkit-animation-duration: 0.3s;
     -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul-text;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
     animation-name: muncul-text;
-    animation-duration: 0.3s
+    animation-duration: 0.3s;
     animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
 }
 
 #modal-footer {
-    flex-direction: row;
+    flex-direction: row;    
     position: relative;
     height: 20%;
     background: #2d2e2e;
@@ -498,6 +562,11 @@ html, body {
     to   {font-size: 120px;}
 }
 
+@-moz-keyframes muncul-text {
+    from {font-size: 0;}
+    to   {font-size: 120px;}
+}
+
 @keyframes muncul {
     from {width: 50px; height: 30px;}
     to   {width: 800px; height: 500px;}
@@ -507,3 +576,9 @@ html, body {
     from {width: 50px; height: 30px;}
     to   {width: 800px; height: 500px;}
 }
+
+@-moz-keyframes muncul {
+    from {width: 50px; height: 30px;}
+    to   {width: 800px; height: 500px;}
+}
+

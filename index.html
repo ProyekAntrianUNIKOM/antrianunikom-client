@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="homeApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Antrian Unikom</title>
 
 	<script src="public/script/client.js"></script>
   <script src="js/jquery-1.12.4.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<script>
+		angular.module('homeApp',[])
+			.controller('homeController',function($scope,$http){
+				$http.get('http://localhost:8080/apiantrian/public/api/v1/video')
+					.success(function(data,status){
+						$scope.video=data.result[0].link;
+					});
+			});
+	</script>
   <script type="text/javascript">
       $(document).ready(function(){
-
           setInterval(loaddata,1000);
-
       });
           function loaddata(){
              var host = window.location.host;
@@ -30,7 +38,7 @@
   </script>
   <link rel="stylesheet" href="public/style/style.css">
 </head>
-<body onload="times()">
+<body onload="times()" ng-controller="homeController">
 	<div id="bg" class="bg-antrian" style="background: #fff;">
 
 		<!-- Header -->
@@ -62,7 +70,8 @@
 
 		<!-- video -->
 		<div id="bg-main" class="flex">
-            <video src="public/video/cl.mp4" height="100%" width="70%" style="background:#f5f5f5;" autoplay loop muted></video>
+
+            <video src={{'http://localhost:8080/apiantrian/public/video/'+video}} height="100%" width="70%" style="background:#f5f5f5;" autoplay loop muted></video>
             <div id="column" class="flex">
                <div id="news"></div>
                 <div id="logo" class="flex">

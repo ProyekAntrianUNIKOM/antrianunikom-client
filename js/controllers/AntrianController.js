@@ -3,6 +3,27 @@ var host = "http://"+window.location.host;
 var base_url  = host+"/apiantrian/public/api/v1/";
 angular.module('mainApp.controllers', ['ngCookies']).
   controller('AntrianController',function($scope,$http,$cookieStore,$location){
+    $scope.daftarBaru = function(){
+      var data ={
+        'no_rfid':$scope.rfid,
+        'nim' : $scope.nim,
+        'nama' : $scope.nama,
+        'jurusan' : $scope.jurusan
+      }
+      $http.post(base_url+'tambahmahasiswa',data).success(function(data,status){
+        if(data.status==200)
+        {
+          alert('Selamat KSM anda berhasil ditambahkan');
+          $location.path('/');
+        }else
+        {
+          alert(data.message);
+        }
+      }).error(function(data){
+        //document.write(data);
+        alert('NIM sudah terdaftarkan silahkan hubungi bagian administrator');
+      });
+    }
     $scope.ambilAntrian=function(){
       $http({
             method : "POST",

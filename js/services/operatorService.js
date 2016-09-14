@@ -5,7 +5,7 @@ app.factory('operatorService',function($http,base_url){
     obj.terakhir = function(id){
         return $http.get(base_url+"temp/"+id);
     };
-    obj.simpan = function (id_antrian,operator,id) {
+    obj.simpan = function (operator,id) {
 
         $http.get(base_url+"getantrian/"+id).success(function(data,status){
             var data = {

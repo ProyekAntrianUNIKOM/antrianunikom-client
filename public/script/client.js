@@ -30,7 +30,7 @@ var times = function(){
     var h = checkTime(d.getHours());
     var m = checkTime(d.getMinutes());
     var s = checkTime(d.getSeconds());
-    
+
     document.getElementById('footer-time').innerHTML = h + ':' + m + ':' + s;
 
     var t = setTimeout(times, 1000);

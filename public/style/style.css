@@ -98,7 +98,7 @@ html, body {
 
 .bg-antrian #row .card-antrian {
     border-right: 1px solid rgba(255, 255, 255, 0.85);
-    width: 25%;
+    width: 100%;
     height: 80%;
     flex-direction: column;
     justify-content: space-around;
@@ -386,7 +386,7 @@ html, body {
     font-size: 20px;
     border-bottom: 1px solid rgba(0,0,0,0.3);
     transition: height 0.3s;
-} 
+}
 
 .login #bg-main #bg-row #main table tr td{
     padding: 15px;
@@ -480,7 +480,7 @@ html, body {
     position: absolute;
     margin: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    
+
     -webkit-animation-name: muncul;
     -webkit-animation-duration: 0.3s;
     -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
@@ -532,7 +532,7 @@ html, body {
 }
 
 #modal-footer {
-    flex-direction: row;    
+    flex-direction: row;
     position: relative;
     height: 20%;
     background: #2d2e2e;
@@ -581,4 +581,3 @@ html, body {
     from {width: 50px; height: 30px;}
     to   {width: 800px; height: 500px;}
 }
-

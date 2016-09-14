@@ -11,9 +11,10 @@ app.factory('loginService',function($http,$location,$q,sessionService,base_url){
                         sessionService.set('nama',data.result[0].nama);
                         sessionService.set('loket',data.result[0].no_loket);
                         sessionService.set('nama_loket',data.result[0].nama_loket)
-                        $location.path('/');
-                        obj.push(1);
-                        console.log(obj.pop());
+                        //$location.path('/');
+                        document.location.href="../operator";
+                        //obj.push(1);
+                        //console.log(obj.pop());
                     }else{
                         scope.msgText="USERNAME ATAU PASSWORD SALAH";
                         $location.path('/login');

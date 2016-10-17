@@ -1,51 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="standbyApp">
+<html lang="en" ng-app>
 <head>
 	<meta charset="UTF-8">
-	<title>Stand By</title>
+	<title>Document</title>
 	<script src="public/script/angular.min.js"></script>
 	<link rel="stylesheet" href="public/style/style.css">
 </head>
-<body onload="times()" ng-controller="MainController">
+<body onload="times()">
 	<div id="background"></div>
 	<div id="bg">
 
 		<!-- Header -->
 		<div id="bg-header" class="flex">
-			<h1> {{hallo}} </h1>
+			<h1> Welcome </h1>
 		</div>
-		<div >
 
-		</div>
 		<!-- slider -->
-
 		<div id="cont-slider" class="flex">
-			<div id="slider" class="flex" style="overflow:hidden; flex-direction:row;" >
-							<!--
-                    setiap menambah gambar baru,
-                    tambah attribute id="img-<ke-n>" dan class="slider"
-							-->
-						
-                <img id={{'img-'+data.id_photo}} class="slider" src={{'public/img/'+data.link}} alt="gambar" ng-repeat="data in photos">
+			<div id="slider" class="flex" style="overflow:hidden; flex-direction:row;">
+
 
 			</div>
 		</div>
 
-
 						<!-- Footer -->
-		<div id="footer" class="flex" style="background-color: rgba(255, 255, 255, 0.9)">
+		<div id="footer" class="flex" style="background-color: rgba(255, 255, 255, 0.9);">
 			<div id="footer-time"></div>
 			<marquee>
 				UNIVERSITAS KOMPUTER INDONESIA
 			</marquee>
 		</div>
 
-
         <div id="frame">
             <img src="public/img/frameset.png" alt="">
         </div>
-
 	</div>
+
 
 	<div id="cont-logo-stnd" class="flex">
         <img id="logo-stnd" src="public/img/logo.png" height="115" alt="Logo">
@@ -59,8 +49,59 @@
             </a>
         </div>
     </div>
-				<script type="text/javascript" src="public/script/app.js"></script>
-    <script type="text/javascript" src="public/script/client.js"></script>
 
+    <script type="text/javascript" src="public/script/client.js"></script>
+    <script>
+        var id = function(val){ return document.getElementById(val); };
+        var sel = function(val){ return document.querySelectorAll(val); };
+
+        //-- slideshow standby --
+        var ximg = sel('img').length + 1;
+        var x = 1;
+				console.log(ximg);
+        function active(n) {
+            var j = n + 1;
+            for (var i = 1; i <= ximg; i++) {
+                id('img-' + i).style.zIndex = i;
+
+            }
+                if (j > ximg)
+                    j = 1;
+
+                id('img-' + n).style.zIndex = ximg + 1;
+                id('img-' + n).style.display = 'inherit';
+                id('img-' + j).style.display = 'none';
+        }
+
+        function change() {
+            x += 1;
+
+           if (x > ximg)
+               x = 1;
+
+            return active(x);
+        }
+
+        setInterval(change, 10000);
+
+    </script>
+    <script src="controller/controller.js"></script>
+    
+		<script src="js/jquery-1.12.4.js"></script>
+		<script type="text/javascript">
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:8080/apiantrian/public/api/v1/banner',
+				dataType: 'json',
+				success: function (data) {
+					var i=1;
+					jQuery.each(data.result, function(index, element) {
+							$('#slider').append('<div id=img-'+i+' class=slider><img src=http://localhost:8080/apiantrian/public/banner/'+element.banner_img+' alt=gambar><div class=caption><p>'+element.judul+'</p></div></div>');
+							i+=1;
+					});
+				}
+			});
+		</script>
+        
 </body>
 </html>

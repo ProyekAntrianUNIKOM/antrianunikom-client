@@ -34,20 +34,26 @@ angular.module('mainApp.controllers', ['ngCookies']).
       }).success(function(data,status){
           if(data.status==200){
               $cookieStore.put('norfid',data.result[0].no_rfid);
-             //console.log($cookieStore.get('norfid'));
+              //console.log($cookieStore.get('norfid'));
               $location.path('/step2');
               //document.location.href="#/step2";
           }else{
-              console.log(data);
+              $scope.no_rfid = "";              
               swal({
                   title: "Uppss",
                   text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
                   type: "error",
-                  confirmButtonText: "OKE"
-              });
+                  confirmButtonText: "OKE",
+                  timer:2000
+            });
           }
       }).error(function (data,staus) {
-        document.write(data);
+        swal({
+                  title: "Uppss",
+                  text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
+                  type: "error",
+                  confirmButtonText: "OKE"
+        });
       });
     };
 
@@ -87,8 +93,9 @@ angular.module('mainApp.controllers', ['ngCookies']).
             }
         }).success(function(data,status){
             $cookieStore.remove('rfid');
-            $location.path('/');
-        }).error(function(data,status){
+            //$location.path('/');
+            document.location.href="../standby.html";
+      }).error(function(data,status){
             document.write(data);
         });
       }

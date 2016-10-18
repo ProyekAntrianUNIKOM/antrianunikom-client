@@ -1,3 +1,4 @@
+<script></script>
 <div id="background"></div>
 	<div id="bg" class="ambil-antrian">
 
@@ -11,11 +12,13 @@
 			<div id="bg-row" class="flex">
               <span ng-bind="nomor"></span>
 			</div>
+			<div ng-bind="jumAntrian"></div>
 		</div>
-
+		
 		<!-- Footer -->
 		<div id="footer" class="flex">
-            <a href="" id="call" class="flex" ng-click="panggilAntrian()">
+            
+			<a href="" id="call" class="flex" ng-click="panggilAntrian()">
                 PANGGIL LAGI
             </a>
             <a href="#" id="next" class="flex" ng-click="selanjutnya()">
@@ -24,7 +27,8 @@
             <a href="#" id="next" class="flex" ng-click="logout()">
                 LOGOUT
             </a>
+			
 		</div>
-
 	</div>
+	
     

@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<center>
+<center style="display:none">
     <div class="panel col-md-12" style="width: 100%;">
         <div class="panel-heading">
             <h1>Selamat Datang</h1>
@@ -29,12 +29,13 @@
         <div class="panel-body">
             <div class="col-md-12"></div>
             <div class="row col-md-12">
-                <div class="form-group vertical-center-row">
-                    <input type="text" name="rfid" id="rfid" ng-model="no_rfid" class="form-control">
-                </div>
+                <form ng-submit="ambilAntrian()">
+                    <div class="form-group vertical-center-row">
+                        <input type="text" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" autofocus>
+                    </div>
+                </form>
                 <div class="form-group">
                     <button class="btn btn-primary" ng-click="ambilAntrian()" id="cek">Lanjutkan</button>
-                    <a href="#daftarbaru" class="btn btn-success">Daftarkan KSM Anda </a>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ app.factory('loginService',function($http,$location,$q,sessionService,base_url){
                         sessionService.set('operator',data.result[0].id_operator);
                         sessionService.set('nama',data.result[0].nama);
                         sessionService.set('loket',data.result[0].no_loket);
-                        sessionService.set('nama_loket',data.result[0].nama_loket)
+                        sessionService.set('nama_loket',data.result[0].nama_loket);
                         //$location.path('/');
                         document.location.href="../operator";
                         //obj.push(1);

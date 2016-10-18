@@ -93,9 +93,11 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100%;
-    background: -webkit-linear-gradient(left, rgb(29, 209, 246), rgb(9, 96, 203));
+    /*background: -webkit-linear-gradient(left, rgb(29, 209, 246), rgb(9, 96, 203));
     background: -moz-linear-gradient(left, rgb(29, 209, 246), rgb(9, 96, 203));
     background: linear-gradient(left, rgb(29, 209, 246), rgb(9, 96, 203));
+    */
+    background:#007AFF;
 }
 
 .bg-antrian #row .card-antrian {
@@ -107,7 +109,8 @@ html, body {
     margin: 0.5%;
     font-family: 'Open Sans', calibri;
     font-weight: 700;
-    background: rgba(51, 175, 209, .75);
+    /*background: rgba(51, 175, 209, .75);*/
+    background:#0066D4;
     border-radius: 3%;
 }
 
@@ -402,6 +405,8 @@ html, body {
     font-size: 200%;
     margin: 1%;
 }
+
+
 
 #bg-main #bg-row a {
     justify-content: center;

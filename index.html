@@ -8,8 +8,50 @@
 	<script src="public/script/client.js"></script>
 	<script src="js/jquery-1.12.4.js"></script>
 	<script>
+		var host = "http://"+window.location.host;
+        var base_url  = host+"/apiantrian/public/api/v1/";
+		var url2 = host+"/apiantrian/";
+		
 		$(document).ready(function(){
+		 var tes = new Array(); 
           setInterval(loaddata,1000);
+		  $.ajax({
+		    type: 'GET',
+		    url: base_url+'berita',
+		    dataType: 'json',
+		    success: function (data) {
+		      var i=1;
+		      jQuery.each(data.result, function(index, element) {
+		          $('#news').append('<div id=content-'+i+' class=berita><img src='+url2+'public/img/'+element.foto+' alt=image> <h1>'+element.judul+'</h1></div>');
+		          i+=1;
+		      });
+			  var id = function(val){ return document.getElementById(val); }
+				var sel = function(val){ return document.querySelectorAll(val); }
+				var ximg = i;
+				//console.log(ximg);
+				var trans = 0;
+				var temp = 2;
+				
+				function geser() {
+					trans = trans + 107;
+					temp++;
+					
+					if (temp > ximg) { 
+						trans = 0;
+						temp = 2;
+					}
+
+					for (var j = 1; j <= ximg; j++){
+						id('content-' + j).style.transform = 'translateY(-'+trans+'%)'; 
+						id('content-' + j).style.transition = 'transform 2s';
+					}
+				}
+				
+				setInterval(geser, 10000);
+		    }
+		  });
+		    
+
       	});
           function loaddata(){
              var host = window.location.host;
@@ -65,18 +107,7 @@
             <video src="public/video/cl.mp4" height="100%" style="background:#fff;" autoplay loop muted></video>
             <div id="column" class="flex">
                <div id="news">
-                    <div id="content-1" class="berita">
-                        <img src="public/img/slider_imagine.png" alt="image">
-                        <h1>Juara Imagine Cup 2015</h1>                            
-                   </div>
-				   <div id="content-2" class="berita">
-                        <img src="public/img/slider_imagine.png" alt="image">
-                        <h1>Juara Imagine Cup 2015</h1>                            
-                   </div>
-				   <div id="content-3" class="berita">
-                        <img src="public/img/slider_imagine.png" alt="image">
-                        <h1>Juara Imagine Cup 2015</h1>                            
-                   </div>                    
+                                      
                </div>
             </div>
 		</div>
@@ -92,28 +123,7 @@
 	</div>
     
 	<script>
-			var id = function(val){ return document.getElementById(val); }
-			var sel = function(val){ return document.querySelectorAll(val); }
-			var ximg = sel('img').length;
-			var trans = 0;
-			var temp = 2;
 			
-			function geser() {
-				trans = trans + 107;
-				temp++;
-				
-				if (temp > ximg) { 
-					trans = 0;
-					temp = 2;
-				}
-
-				for (var j = 1; j <= ximg; j++){
-					id('content-' + j).style.transform = 'translateY(-'+trans+'%)'; 
-					id('content-' + j).style.transition = 'transform 2s';
-				}
-			}
-			
-			setInterval(geser, 10000);
     </script>
 </body>
 </html>

@@ -33,7 +33,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     function playsound(i,j,nomor){
       if(i<nomor.length) {
-        var sound = new Audio('../public/sound/'+nomor[i]+'.mp3');
+        var sound = new Audio('../public/sound/'+nomor[i]+'.wav');
           sound.addEventListener('ended', function() {
               this.currentTime = 0;
               playsound(i+1,j,nomor);

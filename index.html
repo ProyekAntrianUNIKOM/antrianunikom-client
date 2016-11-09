@@ -70,10 +70,21 @@
                   type: "GET",
                   dataType: 'json',
                   success: function(data) {
-                      $("#1").html(data.result[0].no_antrian);
-                      $("#2").html(data.result[1].no_antrian);
-                      $("#3").html(data.result[2].no_antrian);
-                      $("#4").html(data.result[3].no_antrian);
+										$("#1").html(data.result[0].no_antrian);
+										$("#nim1").html(data.result[0].nim);
+										$("#nama1").html(data.result[0].nama);
+
+										$("#2").html(data.result[1].no_antrian);
+										$("#nim2").html(data.result[1].nim);
+										$("#nama2").html(data.result[1].nama);
+
+										$("#3").html(data.result[2].no_antrian);
+										$("#nim3").html(data.result[2].nim);
+										$("#nama3").html(data.result[2].nama);
+
+										$("#4").html(data.result[3].no_antrian);
+										$("#nim4").html(data.result[3].nim);
+										$("#nama4").html(data.result[3].nama);
                   }
               });
           }
@@ -91,21 +102,25 @@
 				<div class="card-antrian flex">
 					<div class="nomor" id="1">109</div>
 					<div class="ketLoket">LOKET 1</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim1">123</a> Nama : <a id="nama1">asd</a></div>
 				</div>
 
 				<div class="card-antrian flex">
 					<div class="nomor" id="2">115</div>
 					<div class="ketLoket">LOKET 2</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim2">123</a> Nama : <a id="nama2">asd</a></div>
 				</div>
 
 				<div class="card-antrian flex">
 					<div class="nomor" id="3">302</div>
 					<div class="ketLoket">LOKET 3</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim3">123</a> Nama : <a id="nama3">asd</a></div>
 				</div>
 
 				<div class="card-antrian flex">
 					<div class="nomor" id="4">204</div>
 					<div class="ketLoket">LOKET 4</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim4">123</a> Nama : <a id="nama4">asd</a></div>
 				</div>
 
 			</div>

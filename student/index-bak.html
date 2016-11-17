@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="public/style/style.css">
+    <style>@import 'https://fonts.googleapis.com/css?family=Open+Sans';</style>
+	<script src="public/script/client.js"></script>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script>
+		var host = "http://"+window.location.host;
+        var base_url  = host+"/apiantrian/public/api/v1/";
+		var url2 = host+"/apiantrian/";
+
+		$(document).ready(function(){
+			$.ajax({
+				type:'GET',
+				url : base_url+'cekhari',
+				success:function(data){
+					console.log('Fungsi cek hari dipanggil');
+				}
+			});
+
+
+		 var tes = new Array();
+          setInterval(loaddata,1000);
+		  $.ajax({
+		    type: 'GET',
+		    url: base_url+'berita',
+		    dataType: 'json',
+		    success: function (data) {
+		      var i=1;
+		      jQuery.each(data.result, function(index, element) {
+		          $('#news').append('<div id=content-'+i+' class=berita><img src='+url2+'public/img/'+element.foto+' alt=image> <h1>'+element.judul+'</h1></div>');
+		          i+=1;
+		      });
+			  var id = function(val){ return document.getElementById(val); }
+				var sel = function(val){ return document.querySelectorAll(val); }
+				var ximg = i;
+				//console.log(ximg);
+				var trans = 0;
+				var temp = 2;
+
+				function geser() {
+					trans = trans + 107;
+					temp++;
+
+					if (temp > ximg) {
+						trans = 0;
+						temp = 2;
+					}
+
+					for (var j = 1; j <= ximg; j++){
+						id('content-' + j).style.transform = 'translateY(-'+trans+'%)';
+						id('content-' + j).style.transition = 'transform 2s';
+					}
+				}
+
+				setInterval(geser, 10000);
+		    }
+		  });
+
+
+      	});
+          function loaddata(){
+             var host = window.location.host;
+              $.ajax({
+                  url:'http://'+host+"/apiantrian/public/api/v1/temp",
+                  timeout: 1000,
+                  type: "GET",
+                  dataType: 'json',
+                  success: function(data) {
+										$("#1").html(data.result[0].no_antrian);
+										$("#nim1").html(data.result[0].nim);
+										$("#nama1").html(data.result[0].nama);
+
+										$("#2").html(data.result[1].no_antrian);
+										$("#nim2").html(data.result[1].nim);
+										$("#nama2").html(data.result[1].nama);
+
+										$("#3").html(data.result[2].no_antrian);
+										$("#nim3").html(data.result[2].nim);
+										$("#nama3").html(data.result[2].nama);
+
+										$("#4").html(data.result[3].no_antrian);
+										$("#nim4").html(data.result[3].nim);
+										$("#nama4").html(data.result[3].nama);
+                  }
+              });
+          }
+
+	</script>
+
+</head>
+<body onload="times()">
+	<div id="bg" class="bg-antrian" style="background: #fff;">
+
+		<!-- Header -->
+		<div id="bg-header" class="" style="background: rgba(3, 185, 242, .9)">
+			<div id="row" class="flex">
+
+				<div class="card-antrian flex">
+					<div class="nomor" id="1">109</div>
+					<div class="ketLoket">LOKET 1</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim1">123</a> Nama : <a id="nama1">asd</a></div>
+				</div>
+
+				<div class="card-antrian flex">
+					<div class="nomor" id="2">115</div>
+					<div class="ketLoket">LOKET 2</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim2">123</a> Nama : <a id="nama2">asd</a></div>
+				</div>
+
+				<div class="card-antrian flex">
+					<div class="nomor" id="3">302</div>
+					<div class="ketLoket">LOKET 3</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim3">123</a> Nama : <a id="nama3">asd</a></div>
+				</div>
+
+				<div class="card-antrian flex">
+					<div class="nomor" id="4">204</div>
+					<div class="ketLoket">LOKET 4</div>
+					<div class="ketLoket" style="font-size:20px;padding-top:20px">Nim : <a id="nim4">123</a> Nama : <a id="nama4">asd</a></div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- tengah -->
+		<div id="bg-main" class="flex">
+            <video src="public/video/cl.mp4" height="100%" style="background:#fff;" autoplay loop muted></video>
+            <div id="column" class="flex">
+               <div id="news">
+
+               </div>
+            </div>
+		</div>
+
+		<!-- Footer -->
+		<div id="footer" class="flex">
+			<div id="footer-time"></div>
+			<marquee >
+				UNIVERSITAS KOMPUTER INDONESIA
+			</marquee>
+		</div>
+
+	</div>
+
+	<script>
+
+    </script>
+</body>
+</html>

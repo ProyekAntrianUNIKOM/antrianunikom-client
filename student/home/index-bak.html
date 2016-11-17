@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ANTRIAN UNIKOM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/app/helper.js"></script>
+
+    <script src="../js/sweetalert.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../lib/angular/angular-cookies.js"></script>
+    <script src="../js/app/antrian.js"></script>
+
+    <script src="../js/controllers/AntrianController.js"></script>
+
+
+</head>
+<body>
+<div id="background"></div>
+<div id="bg">
+    <div id="bg-header" class="flex" ng-include="'../views/home/template/head.html'"></div>
+
+    <div id="bg-main" class="flex" ng-view></div>
+
+    <!-- Footer -->
+    <div id="footer" class="flex" ng-include="'../views/home/template/footer.html'"></div>
+</div>
+
+<!--<script src="../controller/controller.js"></script>-->
+</body>
+</html>

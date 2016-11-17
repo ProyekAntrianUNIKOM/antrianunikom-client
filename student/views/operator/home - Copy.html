@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3 ALIGN="CENTER">LOKET {{noloket}} ({{nama_loket | uppercase}})</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h3 align="center">NOMOR ANTRIAN</h3>
+                    <h2 align="center">{{nomor}}</h2>
+
+                </div>
+                <div class="panel-footer" align="center">
+                    <button class="btn btn-primary" ng-click="panggilAntrian()">PANGGIL LAGI</button>
+                    <button class="btn btn-warning" ng-click="selanjutnya()">SELANJUTNYA</button>
+                    <button class="btn btn-success" ng-click="logout()">LOGOUT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bel" src="../public/bell.mp3"></audio>
+    <audio id="nomorurut" src="../public/sound/nomor-urut.wav"></audio>
+    <audio id="1" src={{'../public/sound/'+noarray[0]+'.wav'}}></audio>
+    <audio id="2" src={{'../public/sound/'+noarray[1]+'.wav'}}></audio>
+    <audio id="3" src={{'../public/sound/'+noarray[2]+'.wav'}}></audio>
+    <audio id="4" src={{'../public/sound/loket.wav'}}></audio>
+    <audio id="5" src={{'../public/sound/'+noloket+'.wav'}}></audio>
+
+</div>
+<div ng-repeat="data in antrian">
+
+</div>
+<script type="text/javascript">
+
+</script>

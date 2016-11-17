@@ -3,17 +3,22 @@ app.factory('loginService',function($http,$location,$q,sessionService,base_url,$
     return{
         login:function (admin,scope) {
            var $promise=$http.post(base_url+'authadmin',admin); //send data
-            $promise
-                .success(function(data,status){
+            $promise.success(function(data,status){
                     if(data.status==200){
+                        scope.status = 'refresh';
+                        scope.msgTextsuccess="Sedang mengirim data ...";
                         sessionService.set('id_admin',data.result[0].id_admin);
                         sessionService.set('username',data.result[0].username);
+                        sessionService.set('role',data.result[0].role);
                         document.getElementById('error').style.display = 'none';
                         document.getElementById('success').style.display = 'block';
-                        scope.msgTextsuccess="Berhasil Login , beberapa saat lagi anda akan di redirect ke halaman admin...";
                         $timeout(function(){
-                          $location.path("/");
-                        },2000);
+                          scope.status = 'ok';
+                          scope.msgTextsuccess="Berhasil Login , beberapa saat lagi anda akan di redirect ke halaman admin...";
+                          $timeout(function () {
+                            $location.path("/");
+                          }, 1000);
+                        },3000);
                     }else{
                         document.getElementById('error').style.display = 'block';
                         scope.msgTexterror="Maaf, username atau password yang anda masukan salah.";

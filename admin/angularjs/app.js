@@ -57,12 +57,29 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
   }
 
 }).controller("nav", function ($scope,sessionService,$http,$location) {
-  $scope.logout = function() {
-    sessionService.destroy('id_admin');
-    sessionService.destroy('username');
-    $location.path('/login');
-  }
   $scope.username = sessionService.get('username');
+  $scope.role = sessionService.get('role');
+}).directive("navi",function(){
+  return {
+    template: '<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">'+
+      '<div class="menu_section">'+
+        '<h3>General</h3>'+
+        '<ul class="nav side-menu">'+
+          '<li><a ng-href="#/"><i class="fa fa-home"></i> Home</a></li>'+
+          '<div ng-if=role == "rektor">'+
+            '<li><a ng-href="#/operator"><i class="fa fa-user"></i> Operator </a></li>'+
+          '</div>'+
+          '<div ng-if=role == "admin">'+
+            '<li><a ng-href="#/berita/add"><i class="fa fa-pencil-square-o"></i> Tambah Berita </a></li>'+
+            '<li><a ng-href="#/berita"><i class="fa fa-newspaper-o"></i> Lihat Berita </a></li>'+
+            '<li><a ng-href="#/mahasiswa"><i class="fa fa-users"></i> Mahasiswa </a></li>'+
+            '<li><a ng-href="#/banner"><i class="fa fa-file-image-o"></i> Banner </a></li>'+
+            '<li><a ng-href="#/video"><i class="fa fa-youtube-play"></i> Video </a></li>'+
+          '</div>'+
+        '</ul>'+
+      '</div>'+
+    '</div>'
+  }
 }).controller("head",function($scope,$http){
   $http.get(base_url+'history/loket').success(function(data){
     $scope.loketdata = data.result;

@@ -1,4 +1,4 @@
-/*@font-face {
+@font-face {
     font-family: 'Montserrat-SemiBold';
     src: url('../font/Montserrat-SemiBold.otf');
 }
@@ -11,17 +11,6 @@
 @font-face {
     font-family: 'Lobster';
     src: url('../font/Lobster.otf');
-}*/
-
-//-------------------------------------
-@font-face {
-    font-family: 'Montserrat';
-    src: url('../font/Montserrat/Montserrat-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Lobster';
-    src: url('../font/Lobster/Lobster-Regular.ttf');
 }
 
 .flex {
@@ -131,13 +120,11 @@ html, body {
     color: #ffffff;
     margin-top: -40px;
     font-size: 25px;
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
 }
 
 #bg-header h1 {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     color: #ffffff;
     font-size: 60px;
     font-weight: lighter;
@@ -166,12 +153,11 @@ html, body {
 }
 
 #logo-stnd {
-    margin-right: 2%;
+    margin-right: 4%;
 }
 
 #cont-ktm {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     position: absolute;
     top: 20%;
     height: 72.5%;
@@ -202,17 +188,14 @@ html, body {
 
 
 #label-1 {
-    //font-family: 'Montserrat-SemiBold', calibri;
-    font-family: 'Montserrat', calibri;
-    font-weight: bold;
+    font-family: 'Montserrat-SemiBold', calibri;
     color: #017dbe;
     font-size: 54px;
     margin: -10px;
 }
 
 #label-2 {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     font-size: 12px;
     color: #ffffff;
 }
@@ -235,131 +218,6 @@ html, body {
 
 /*---------------------- main ------------------------*/
 
-.bg-antrian #main {
-    background-color: #003d5a;
-    flex-direction: column;
-    justify-content: space-around;;
-    align-items: stretch;
-    height: 93%;
-    font-family: 'Open Sans', calibri;
-}
-
-.bg-antrian #main .active {
-    height: 60%;
-    margin-left: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
-.bg-antrian #main .active div, .bg-antrian #main .queue div {
-    margin-right: 1%;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-.bg-antrian #main .process, .bg-antrian #main .video {
-    box-sizing: border-box;
-    height: 100%;
-    background-color: #0067b0;
-    border-radius: 5px;
-}
-
-.bg-antrian #main .process {
-    width: 50%;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.bg-antrian #main .process .header {
-    height: 32%;
-    border-radius: 0;
-    border-bottom: 1px solid #fff;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    margin: 1%;
-    box-sizing: border-box;
-    align-items: center;
-}
-
-.bg-antrian #main .process .header .text {
-    width: 50%;
-    color: #fff;
-}
-
-.bg-antrian #main .process .header .text .label-1,
-.bg-antrian #main .process .header .text .label-2
-{
-    font-weight: bold;
-    font-size: 20px;
-    padding: 2px;
-}
-
-.bg-antrian #main .process .antrian-active {
-    height: 68%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.bg-antrian #main .process .antrian-active .nomor {
-    font-size: 100px;
-    color: #fcff00;
-    padding: 0;
-    font-weight: bold;
-}
-
-.bg-antrian #main .process .antrian-active .id {
-    font-size: 24px;
-    color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-}
-
-.bg-antrian #main .video {
-    justify-content: center;;
-    align-items: center;
-    width: 50%;
-    overflow: hidden;
-}
-
-.bg-antrian #main .queue {
-    height: 40%;
-    margin-left: 1%;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 1%;
-}
-
-.bg-antrian #main .queue .loket {
-    height: 100%;
-    width: 100%;
-    background-color: #0067b0;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-
-.bg-antrian #main .queue .nama-loket {
-    color: #fff;
-    font-size: 35px;
-}
-
-.bg-antrian #main .queue .nomor {
-    color: #fcff00;
-    font-size: 70px;
-}
-
-.bg-antrian #main .queue .id {
-    color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 25px;
-    text-align: center;
-}
-
 #bg-main {
 /*    height: 500px;*/
     height: 73%;
@@ -375,8 +233,7 @@ html, body {
 }
 
 .ambil-antrian #bg-main #bg-row {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     width: 100%;
     height: 100%;
     background-color: rgba(3, 185, 242, .9);
@@ -391,7 +248,7 @@ html, body {
 }
 
 .bg-antrian #bg-main #column {
-    width: 37%;
+    width: 100%;
     height: 100%;
     background-color: #fff;
     flex-direction: column;
@@ -406,8 +263,7 @@ html, body {
     position: relative;
     margin: 2%;
     margin-bottom: 0;
-    //font-family: 'Montserrat-Regular';
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular';
     color: rgba(0,0,0,0.7);
     overflow: hidden;
 }
@@ -440,8 +296,7 @@ html, body {
 
 
 #bg-main #label {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     color: #ffffff;
     font-size: 25px;
     align-items: center;
@@ -563,9 +418,7 @@ html, body {
     text-align: center;
     text-decoration: none;
     color: #017dbe;
-    //font-family: 'Montserrat-SemiBold', calibri;
-    font-family: 'Montserrat', calibri;
-    font-weight: bold;
+    font-family: 'Montserrat-SemiBold', calibri;
     text-wrap: wrap;
 }
 
@@ -574,8 +427,7 @@ html, body {
 }
 
 .login #bg-main #bg-row {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     width: 60%;
     flex-direction: column;
 }
@@ -649,8 +501,7 @@ html, body {
 
 #footer {
     font-size: 20px;
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     font-weight: lighter;
     height: 7%;
     align-items: center;
@@ -697,8 +548,7 @@ html, body {
 }
 
 #modal {
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
     display: none;
     flex-direction: column;
     height: 500px;
@@ -828,8 +678,7 @@ html, body {
 
 #form-daftar td, #form-daftar input {
     font-size: 25px;
-    //font-family: 'Montserrat-Regular', calibri;
-    font-family: 'Montserrat', calibri;
+    font-family: 'Montserrat-Regular', calibri;
 }
 
 #form-daftar td {

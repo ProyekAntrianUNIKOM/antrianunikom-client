@@ -13,6 +13,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
     $scope.antriansekarang="";
     sessionService.set("kosong",1);
     $scope.noloket = sessionService.get("loket");
+    $scope.nama_operator = sessionService.get("nama");
     $scope.id_peyanan = sessionService.get("id_pelayanan");
     $scope.nama_pelayanan = sessionService.get("nama_pelayanan");
     $scope.logout = function(){
@@ -61,13 +62,11 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
   }
 
-    console.log(sessionService.get("id_pelayanan"));
-
-    $scope.jumAntrian ="Jumlah Antrian : 0";
+    $scope.jumAntrian ="0";
     function getjumantrian(){
       $http.get(base_url+'getantrian/'+sessionService.get("id_pelayanan")).success(function(data,status){
       var jum = data.result.length;
-      $scope.jumAntrian = "Jumlah Antrian : "+jum;
+      $scope.jumAntrian = jum;
     });
     }
      $interval(getjumantrian, 1000);
@@ -93,6 +92,9 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                       if(data.status==200){
                             $scope.nomor=data.result;
                             $scope.antriansekarang = "NIM : "+data.nim+"\n Nama : "+data.nama+"\n Prodi : "+data.prodi;
+                            $scope.antriansekarangNIM = data.nim;
+                            $scope.antriansekarangNAMA = data.nama;
+                            $scope.antriansekarangPRODI = data.prodi;
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
                             var suara = new Array();

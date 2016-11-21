@@ -1,15 +1,6 @@
 'use strict';
 app.controller('OperatorController',function($scope,operatorService,$interval,sessionService,loginService,$http,$cookieStore){
-    var panggil=function(i,waktu){
-      if(i<=5){
-        setTimeout(function(){
-            var audio = document.getElementById(i);
-          audio.play();
-        },waktu);
-        waktu+=1500;
-        panggil(i+1,waktu);
-      }
-    }
+
     $scope.antriansekarang="";
     sessionService.set("kosong",1);
     $scope.noloket = sessionService.get("loket");
@@ -35,7 +26,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     function playsound(i,j,nomor){
       if(i<nomor.length) {
-        var sound = new Audio('../public/sound/'+nomor[i]+'.wav');
+        var sound = new Audio('../public/sound/'+nomor[i]+'.mp3');
           sound.addEventListener('ended', function() {
               this.currentTime = 0;
               playsound(i+1,j,nomor);
@@ -50,15 +41,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     $scope.panggilAntrian = function(){
       //definisikan suara
-      var suara = new Array();
-      suara.push('antriannomor');
-      for(var i=0;i<$scope.noarray.length;i++) {
-        suara.push($scope.noarray[i]);
-      }
-      suara.push("keloket");
-      suara.push(sessionService.get("loket").toString());
-      //panggil suara
-      playsound(0,1,suara);
+
 
   }
 
@@ -98,7 +81,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
                             var suara = new Array();
-                            suara.push("nomor-urut");
+                            suara.push("antriannomor");
 
                             var ratus = Math.floor(sekarang / 100);
                             var sisa  = sekarang % 100;
@@ -113,7 +96,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             if(sekarang<10) {
                               suara.push(sekarang);
                             } else {
-                              console.log('masuk kesini');
+                            //  console.log('masuk kesini');
                               //cek ratusan
                               if(ratus>0){
                                 if(ratus==1){
@@ -127,10 +110,10 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
                                 if(sisa>0) {
                                   if(sisa < 20){
-                                    if(puluh==10){
-                                      suara.push("sepuluh");
-                                    }else if(puluh==11) {
-                                      suara.push("sebelas");
+                                    if(sisa==10){
+                                      suara.push("10");
+                                    }else if(sisa==11) {
+                                      suara.push("11");
                                     } else {
                                       suara.push(satuan);
                                       suara.push("belas");
@@ -144,58 +127,19 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                                   }
                                 }
                             }
-                            suara.push("loket");
+                            suara.push("keloket");
                             suara.push(sessionService.get('loket'));
                             playsound(0,2,suara);
-                            console.log(suara);
-                            //var bel = document.getElementById('bel');
-                            //bel.play();
-                            //var waktu = bel.duration*500
-                            var suara = new Array();
-                            suara.push('antriannomor');
-                            for(var i=0;i<$scope.noarray.length;i++) {
-                              suara.push($scope.noarray[i]);
-                            }
-                            suara.push("keloket");
-                            suara.push(sessionService.get("loket").toString());
-                            //panggil suara
-                            //playsound(0,1,suara);
-                        }
-                     //$scope.nomor="testse";
-                      //$cookieStore.put('id_antrian',data.result[0].id_antrian);
-                      //$http.get(base_url+"temp/"+sessionService.get("loket")).success(function(data,status){
-                          //var data = data.result;
-                          //$scope.noloket = sessionService.get("loket");
-                          //$scope.nomor = data[0].no_antrian;
-                          //$scope.noarray=$scope.nomor.split("");
 
-                    //  });
+                        }
+
                   });
 
 
 
-                /*operatorService.simpan(sessionService.get('operator'),sessionService.get("loket")).then(function(response){
-                    var data = response.data.result;
-                    $scope.noloket = sessionService.get("loket");
-                    $scope.nomor = data[0].no_antrian;
-                    $scope.noarray=$scope.nomor.split("");
-                    $cookieStore.put('id_antrian',data[0].id_antrian);
-                    /*
-                    var bel = document.getElementById('bel');
-                    bel.play();
-                    var waktu = bel.duration*1000;
-                    setTimeout(function(){
-                      var audio = document.getElementById('nomorurut');
-                      audio.play();
-                    },waktu);
-                    waktu+=1500;
-                    panggil(1,waktu);
 
-                });
-                */
             }
         });
-     // }
 
     }
 

@@ -30,6 +30,10 @@
                         </div>
                     </div>
                     <div class="antrian-active flex">
+	                    <div class="nama-loket">
+							<span class="kode-1" id="noactive"></span>
+							
+						</div>
                         <div class="nomor">
 							<span class="nomor-antrian" id="9"></span>
 						</div>
@@ -49,7 +53,7 @@
             <div class="queue flex">
                 <div id="loket-1" class="loket flex">
 					<div class="nama-loket">
-						<span class="kode-1">AKADEMIK</span>
+						<span class="kode-1">LOKET</span>
 						<span class="kode-2">1</span>
 					</div>
 					<div class="nomor">
@@ -62,7 +66,7 @@
 
                 <div id="loket-2" class="loket flex">
 					<div class="nama-loket">
-						<span class="kode-1">AKADEMIK</span>
+						<span class="kode-1">LOKET</span>
 						<span class="kode-2" >2</span>
 					</div>
 					<div class="nomor">
@@ -75,8 +79,8 @@
 
                 <div id="loket-3" class="loket flex">
 					<div class="nama-loket">
-						<span class="kode-1">ADMINISTRASI</span>
-						<span class="kode-2">1</span>
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">3</span>
 					</div>
 					<div class="nomor">
 						<span class="nomor-antrian" id="3">015</span>
@@ -86,18 +90,70 @@
 					</div>
                 </div>
 
-        <div id="loket-4" class="loket flex">
+        		<div id="loket-4" class="loket flex">
 					<div class="nama-loket">
-						<span class="kode-1">ADMINISTRASI</span>
-						<span class="kode-2">2</span>
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">4</span>
 					</div>
 					<div class="nomor">
-						<span class="nomor-antrian" id="4">051</span>
+						<span class="nomor-antrian" id="4"></span>
 					</div>
 					<div class="id">
-						<span id="nama4" class="nama">Rio Ardhityo</span>
+						<span id="nama4" class="nama"></span>
 					</div>
-        </div>
+        		</div>
+
+        		<div id="loket-5" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">5</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="5"></span>
+					</div>
+					<div class="id">
+						<span id="nama5" class="nama"></span>
+					</div>
+        		</div>
+
+        		<div id="loket-6" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">6</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="6"></span>
+					</div>
+					<div class="id">
+						<span id="nama6" class="nama"></span>
+					</div>
+        		</div>
+
+        		<div id="loket-7" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">7</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="7"></span>
+					</div>
+					<div class="id">
+						<span id="nama7" class="nama"></span>
+					</div>
+        		</div>
+
+        		<div id="loket-8" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">8</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="8"></span>
+					</div>
+					<div class="id">
+						<span id="nama8" class="nama"></span>
+					</div>
+        		</div>
             </div>
         </div>
 
@@ -173,6 +229,8 @@
 										$("#9").html(data.result[8].no_antrian);
 										$("#nim9").html(data.result[8].nim);
 										$("#nama9").html(data.result[8].nama);
+
+										$("#noactive").html("LOKET "+data.result[8].no_loket);
 									}
               });
           }

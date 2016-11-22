@@ -1,39 +1,40 @@
-<script></script>
-<div id="background"></div>
-	<div id="bg" class="ambil-antrian">
+<div class="main flex">
+    <div class="no-antrian">
+        <div class="text flex">Antrian No. : </div>
+        <div class="no flex">029</div>
+        <div class="button flex">
+            <div class="panggil-lagi flex">PANGGIL LAGI</div>
+            <div class="selanjutnya flex">SELANJUTNYA</div>
+        </div>
+    </div>
 
-		<!-- Header -->
-		<div id="bg-header" class="flex">
-			<h1> LOKET {{noloket}} ({{nama_loket | uppercase}}) </h1>
-		</div>
+    <div class="ket-antrian flex">
+        <div class="jumlah-antrian flex">
+            <p>Jumlah Antian : </p>
+            <span id="jumlah-antrian">50</span>
+        </div>
 
-
-		<!-- main -->
-		<div id="bg-main" class="flex">
-			<div id="bg-row" class="flex">
-              <span ng-bind="nomor"></span>
-			</div>
-
-			<div id="tes">
-					{{antriansekarang}}
-			</div>
-			<div ng-bind="jumAntrian"></div>
-
-		</div>
-
-
-		<!-- Footer -->
-		<div id="footer" class="flex">
-
-			<a href="" id="call" class="flex" ng-click="panggilAntrian()">
-                PANGGIL LAGI
-            </a>
-            <a href="#" id="next" class="flex" ng-click="selanjutnya()">
-                SELANJUTNYA
-            </a>
-            <a href="#" id="next" class="flex" ng-click="logout()">
-                LOGOUT
-            </a>
-
-		</div>
-	</div>
+        <div class="info-pengunjung flex">
+            <table>
+                <tr>
+                    <td colspan="3">Info Pengunjung</td>
+                </tr>
+                <tr>
+                    <td>NIM</td>
+                    <td>:</td>
+                    <td id="nim">10113220</td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td id="nama">Muhammad Imam</td>
+                </tr>
+                <tr>
+                    <td>Prodi</td>
+                    <td>:</td>
+                    <td id="prodi">Teknik Informatika</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

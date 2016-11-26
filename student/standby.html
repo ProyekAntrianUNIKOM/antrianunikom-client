@@ -30,6 +30,7 @@
 											//$location.path('/step2');
 											document.location.href="home/#/step2";
 									}else{
+											alert('KTM Tidak Terdaftar');
 											$scope.no_rfid = "";
 											swal({
 													title: "Uppss",
@@ -44,6 +45,14 @@
 							});
 							};
 			});
+	</script>
+
+	<script type="text/javascript">
+		function ubahfocus(){
+			var form = document.getElementById("rfid");
+			form.focus();
+		}
+
 	</script>
 </head>
 <body onload="times()" ng-controller="standByController">
@@ -92,7 +101,7 @@
         </div>
 				<div id="form">
              <form ng-submit="ambilAntrian()">
-                <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" autofocus style="position:fixed;bottom:-1000">
+                <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" onfocusout="ubahfocus()" autofocus style="position:fixed;bottom:-1000">
             </form>
         </div>
 	</div>

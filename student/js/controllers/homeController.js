@@ -26,7 +26,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     function playsound(i,j,nomor){
       if(i<nomor.length) {
-        var sound = new Audio('../public/sound/'+nomor[i]+'.mp3');
+        var sound = new Audio('../public/sound/'+nomor[i]+'.wav');
           sound.addEventListener('ended', function() {
               this.currentTime = 0;
               playsound(i+1,j,nomor);
@@ -55,22 +55,21 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
      $interval(getjumantrian, 1000);
 
     $scope.selanjutnya = function(){
-     // if(sessionService.get("kosong")==0)
-      //{
-      //  alert('Mohon tunggu sejenak');
-    //  }
-    //  {
         $http.get(base_url+"getantrian/"+sessionService.get("id_pelayanan")).success(function (data,status) {
             if(data.status==400){
                 alert('ANTRIAN KOSONG');
             }else{
-                  var data = {
-                      id_antrian : data.result[0].id_antrian,
-                      operator   : sessionService.get('operator'),
-                      loket      : sessionService.get("loket")
-                  }
-                  $http.post(base_url+"antrian/selesai",data).error(function (data) {
+                console.log(data);
+                var datakirim = {
+                  id_antrian : data.result[0].id_antrian,
+                  operator:sessionService.get('operator'),
+                  loket:sessionService.get("loket")
+                }
+                console.log(datakirim);
+                  
+                  $http.post(base_url+"antrian/selesai",datakirim).error(function (data) {
                       document.write(data);
+                      console.log(datakirim);
                   }).success(function(data,status){
                       if(data.status==200){
                             $scope.nomor=data.result;
@@ -78,10 +77,11 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             $scope.antriansekarangNIM = data.nim;
                             $scope.antriansekarangNAMA = data.nama;
                             $scope.antriansekarangPRODI = data.prodi;
+                            $scope.antriansekarangJenispelayanan = data.nama_pelayanan;
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
                             var suara = new Array();
-                            suara.push("antriannomor");
+                            suara.push("nomor-urut");
 
                             var ratus = Math.floor(sekarang / 100);
                             var sisa  = sekarang % 100;
@@ -111,9 +111,9 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                                 if(sisa>0) {
                                   if(sisa < 20){
                                     if(sisa==10){
-                                      suara.push("10");
+                                      suara.push("sepuluh");
                                     }else if(sisa==11) {
-                                      suara.push("11");
+                                      suara.push("sebelas");
                                     } else {
                                       suara.push(satuan);
                                       suara.push("belas");
@@ -127,7 +127,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                                   }
                                 }
                             }
-                            suara.push("keloket");
+                            suara.push("loket");
                             suara.push(sessionService.get('loket'));
                             playsound(0,2,suara);
 

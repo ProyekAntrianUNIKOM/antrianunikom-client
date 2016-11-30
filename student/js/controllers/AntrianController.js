@@ -72,14 +72,17 @@ angular.module('mainApp.controllers', ['ngCookies']).
         //console.log($cookieStore.get('noantrian')+' : '+$cookieStore.get('no_loket'));
         $http({
           method : 'POST',
-            url : base_url+'antrian',
+            url : base_url+'simpanantrian',
             data:{
               'no_rfid' : $cookieStore.get('norfid'),
-              'id_pelayanan': $cookieStore.get('id_pelayanan'),
+              'id_jenispelayanan': $cookieStore.get('id_jenispelayanan'),
               'noantrian':$cookieStore.get('noantrian'),
+              'nama_pelayanan':$cookieStore.get('nama_pelayanan')
             }
         }).success(function(data,status){
             $cookieStore.remove('rfid');
+            $cookieStore.remove('id_jenispelayanan');
+            $cookieStore.remove('nama_pelayanan');
             //$location.path('/');
             document.location.href="../standby.html";
       }).error(function(data,status){
@@ -92,20 +95,63 @@ angular.module('mainApp.controllers', ['ngCookies']).
       $scope.pilihlayanan=function($id,$nama){
            $scope.back = true;
            $scope.nama_layanan = $nama;
-           $cookieStore.put('id_pelayanan',$id);
+           $cookieStore.put('id_jenispelayanan',$id);
+           $cookieStore.put('nama_pelayanan',$nama);
+           $http.get(base_url+"pelayanan/"+$id).success(function(data,status){
+              if(data.result.length>0)
+              {
+                $scope.ambil=false; 
+                $scope.pelayanan=true;
+                $scope.data_pelayanan=data.result;
+              }else {
+                $scope.getnomorantrian();
+              }
+           });
+      }
+
+      //ambil sub pelayanan 
+      $scope.pilihpelayanan = function($id,$nama){
+        $http.get(base_url+'subpelayanan/'+$id).success(function(data,status){
+          $scope.nama_layanan = $nama;
+          $cookieStore.put('nama_pelayanan',$nama);
+          if(data.result.length>0){
+            $scope.data_subpelayanan=data.result;
+            $scope.subpelayanan = true;
+            $scope.pelayanan = false; 
+          }else {
+          
+            $scope.getnomorantrian();
+          }
+        }).error(function(err){
+          document.write(err);
+        })
+      }
+
+      //pilih sub pelayanan 
+      $scope.pilihsubpelayanan = function($id,$nama){
+        var namadulu = $cookieStore.get("nama_pelayanan"); 
+        var namasekarang = namadulu +" "+$nama; 
+        $scope.nama_layanan = $nama;
+        $cookieStore.put("nama_pelayanan",namasekarang);
+        $scope.getnomorantrian();
+      }
+
+      $scope.getnomorantrian=function(){
            document.getElementById('modal-container').style.display = 'flex';
            document.getElementById('modal').style.display = 'flex';
            document.getElementById('modal-container').style.backgroundColor = 'rgba(0,0,0,0.7)';
            $http({
              method : 'GET',
-             url    : base_url+'ambilakhir',
+             url    : base_url+'ambilakhirstudent',
            }).success(function(data,status){
              console.log(data.result);
              $cookieStore.put('noantrian',data.result);
              $scope.noantrian=data.result;
            });
       }
-      $http.get(base_url+'pelayanan').success(function(data,status){
+
+      $http.get(base_url+'jenispelayanan').success(function(data,status){
            $scope.layanan=data.result;
       });
+
   });

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/style/style.css">
+</head>
+<body onload="tanggal()">
+    <div class="ambil-antrian">
+        <div class="header flex">
+            <div class="part-1 flex">
+                <div class="logo" style="height: 75%; width: 110px; margin: 2%;">
+                    <img src="../public/img/logo.png" height="100%" alt="logo">
+                </div>
+                <div class="text">
+                    <div class="label-1" >Biro Administrasi Umum</div>
+                    <div class="label-2">Universitas Komputer Indonesia</div>
+                    <div id="date"></div>
+                </div>
+            </div>
+            <div class="part-2 flex">
+                <div class="nama-loket">Loket 1 Akademik</div>
+                <div class="nama-petugas">Nama Petugas</div>
+            </div>
+        </div>
+
+        <div class="main flex">
+            <div class="no-antrian">
+                <div class="text flex">Antrian No. : </div>
+                <div class="no flex">029</div>
+                <div class="button flex">
+                    <div class="panggil-lagi flex">PANGGIL LAGI</div>
+                    <div class="selanjutnya flex">SELANJUTNYA</div>
+                </div>
+            </div>
+
+            <div class="ket-antrian flex">
+                <div class="jumlah-antrian flex">
+                    <p>Jumlah Antian : </p>
+                    <span id="jumlah-antrian">50</span>
+                </div>
+
+                <div class="info-pengunjung flex">
+                    <table>
+                        <tr>
+                            <td colspan="3">Info Pengunjung</td>
+                        </tr>
+                        <tr>
+                            <td>NIM</td>
+                            <td>:</td>
+                            <td id="nim">10113220</td>
+                        </tr>
+                        <tr>
+                            <td>Nama</td>
+                            <td>:</td>
+                            <td id="nama">Muhammad Imam</td>
+                        </tr>
+                        <tr>
+                            <td>Prodi</td>
+                            <td>:</td>
+                            <td id="prodi">Teknik Informatika</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../public/script/client.js"></script>
+</body>
+</html>

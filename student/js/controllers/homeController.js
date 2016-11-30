@@ -1,15 +1,6 @@
 'use strict';
 app.controller('OperatorController',function($scope,operatorService,$interval,sessionService,loginService,$http,$cookieStore){
-    var panggil=function(i,waktu){
-      if(i<=5){
-        setTimeout(function(){
-            var audio = document.getElementById(i);
-          audio.play();
-        },waktu);
-        waktu+=1500;
-        panggil(i+1,waktu);
-      }
-    }
+
     $scope.antriansekarang="";
     sessionService.set("kosong",1);
     $scope.noloket = sessionService.get("loket");
@@ -24,14 +15,14 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
        loginService.login(user,$scope); // call login service
    }
 
-    operatorService.terakhir(sessionService.get("id_pelayanan")).then(function(response){
-        var data = response.data.result;
-        console.log(data);
-        $scope.noloket = sessionService.get("loket");
-        $scope.nomor = data[0].no_antrian;
-        $scope.noarray=$scope.nomor.split("");
-        $cookieStore.put('id_antrian',data[0].id_antrian);
-    });
+    // operatorService.terakhir(sessionService.get("id_pelayanan")).then(function(response){
+    //     var data = response.data.result;
+    //     console.log(data);
+    //     $scope.noloket = sessionService.get("loket");
+    //     $scope.nomor = data[0].no_antrian;
+    //     $scope.noarray=$scope.nomor.split("");
+    //     $cookieStore.put('id_antrian',data[0].id_antrian);
+    // });
 
     function playsound(i,j,nomor){
       if(i<nomor.length) {
@@ -50,15 +41,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     $scope.panggilAntrian = function(){
       //definisikan suara
-      var suara = new Array();
-      suara.push('antriannomor');
-      for(var i=0;i<$scope.noarray.length;i++) {
-        suara.push($scope.noarray[i]);
-      }
-      suara.push("keloket");
-      suara.push(sessionService.get("loket").toString());
-      //panggil suara
-      playsound(0,1,suara);
+
 
   }
 
@@ -72,29 +55,44 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
      $interval(getjumantrian, 1000);
 
     $scope.selanjutnya = function(){
-     // if(sessionService.get("kosong")==0)
-      //{
-      //  alert('Mohon tunggu sejenak');
-    //  }
-    //  {
+        console.log('Testing : '+$cookieStore.get("id_antrian"));
         $http.get(base_url+"getantrian/"+sessionService.get("id_pelayanan")).success(function (data,status) {
             if(data.status==400){
                 alert('ANTRIAN KOSONG');
             }else{
-                  var data = {
-                      id_antrian : data.result[0].id_antrian,
-                      operator   : sessionService.get('operator'),
-                      loket      : sessionService.get("loket")
+                console.log(data);
+                if($cookieStore.get("id_antrian")>0){
+                  var kirim ={
+                    id_antrian :$cookieStore.get("id_antrian")
                   }
-                  $http.post(base_url+"antrian/selesai",data).error(function (data) {
+
+                  $http.post(base_url+"antrian/terlayani",kirim).success(function(data,status){
+                    //alert('Berhasil update waktu terlayani');
+                  }).error(function(data){
+                    document.write(data);
+                  });
+                }
+                
+                var datakirim = {
+                  id_antrian : data.result[0].id_antrian,
+                  operator:sessionService.get('operator'),
+                  loket:sessionService.get("loket")
+                }
+                //console.log(datakirim);
+                  
+                  $http.post(base_url+"antrian/selesai",datakirim).error(function (data) {
                       document.write(data);
+                      //console.log(datakirim);
                   }).success(function(data,status){
                       if(data.status==200){
+                            $cookieStore.put('id_antrian',data.id_antrian);
+                            console.log('Id antrian : '+data.id_antrian);
                             $scope.nomor=data.result;
                             $scope.antriansekarang = "NIM : "+data.nim+"\n Nama : "+data.nama+"\n Prodi : "+data.prodi;
                             $scope.antriansekarangNIM = data.nim;
                             $scope.antriansekarangNAMA = data.nama;
                             $scope.antriansekarangPRODI = data.prodi;
+                            $scope.antriansekarangJenispelayanan = data.nama_pelayanan;
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
                             var suara = new Array();
@@ -113,7 +111,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             if(sekarang<10) {
                               suara.push(sekarang);
                             } else {
-                              console.log('masuk kesini');
+                            //  console.log('masuk kesini');
                               //cek ratusan
                               if(ratus>0){
                                 if(ratus==1){
@@ -127,9 +125,9 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
                                 if(sisa>0) {
                                   if(sisa < 20){
-                                    if(puluh==10){
+                                    if(sisa==10){
                                       suara.push("sepuluh");
-                                    }else if(puluh==11) {
+                                    }else if(sisa==11) {
                                       suara.push("sebelas");
                                     } else {
                                       suara.push(satuan);
@@ -147,55 +145,16 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             suara.push("loket");
                             suara.push(sessionService.get('loket'));
                             playsound(0,2,suara);
-                            console.log(suara);
-                            //var bel = document.getElementById('bel');
-                            //bel.play();
-                            //var waktu = bel.duration*500
-                            var suara = new Array();
-                            suara.push('antriannomor');
-                            for(var i=0;i<$scope.noarray.length;i++) {
-                              suara.push($scope.noarray[i]);
-                            }
-                            suara.push("keloket");
-                            suara.push(sessionService.get("loket").toString());
-                            //panggil suara
-                            //playsound(0,1,suara);
-                        }
-                     //$scope.nomor="testse";
-                      //$cookieStore.put('id_antrian',data.result[0].id_antrian);
-                      //$http.get(base_url+"temp/"+sessionService.get("loket")).success(function(data,status){
-                          //var data = data.result;
-                          //$scope.noloket = sessionService.get("loket");
-                          //$scope.nomor = data[0].no_antrian;
-                          //$scope.noarray=$scope.nomor.split("");
 
-                    //  });
+                        }
+
                   });
 
 
 
-                /*operatorService.simpan(sessionService.get('operator'),sessionService.get("loket")).then(function(response){
-                    var data = response.data.result;
-                    $scope.noloket = sessionService.get("loket");
-                    $scope.nomor = data[0].no_antrian;
-                    $scope.noarray=$scope.nomor.split("");
-                    $cookieStore.put('id_antrian',data[0].id_antrian);
-                    /*
-                    var bel = document.getElementById('bel');
-                    bel.play();
-                    var waktu = bel.duration*1000;
-                    setTimeout(function(){
-                      var audio = document.getElementById('nomorurut');
-                      audio.play();
-                    },waktu);
-                    waktu+=1500;
-                    panggil(1,waktu);
 
-                });
-                */
             }
         });
-     // }
 
     }
 

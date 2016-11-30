@@ -233,6 +233,7 @@ html, body {
     border-radius: 5px;
 }
 
+
 .bg-antrian #main .process, .bg-antrian #main .video {
     box-sizing: border-box;
     height: 100%;
@@ -275,13 +276,18 @@ html, body {
     height: 68%;
     justify-content: center;
     align-items: center;
-
     flex-direction: column;
 }
 
+.bg-antrian #main .process .antrian-active .nama-loket {
+    color: #fff;
+    font-size: 27px;
+    text-align: center;
+}
+
 .bg-antrian #main .process .antrian-active .nomor {
-    margin-top: -6%;
-    font-size: 130px;
+    margin-top: -2%;
+    font-size: 80px;
     color: #fcff00;
     padding: 0;
     font-weight: bold;

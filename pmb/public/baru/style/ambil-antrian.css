@@ -1,0 +1,181 @@
+.ambil-antrian {
+    height: 100%;
+    width: 100%;
+}
+
+.ambil-antrian .header {
+    height: 20%;
+    width: 100%;
+    background: #0062a7;
+    justify-content: space-between;
+    font-family: 'Montserrat', calibri;
+    color: #fff;
+}
+
+.header .part-1, .header .part-2 {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .part-1 {
+    flex-direction: row;
+    margin-left: 2%;
+}
+
+.header .part-2 {
+    flex-direction: column;
+    margin-right: 2%;
+    align-items: flex-end;
+}
+
+.header .part-1 .text {
+    width: 500px;
+}
+
+.header .part-1 .label-1,
+.header .part-1 .label-2,
+.ambil-antrian .nama-loket {
+    font-size: 25px;
+}
+
+.header .part-1 .label-1,
+.header .part-1 .label-2,
+.header .part-1 #date,
+.ambil-antrian .nama-loket,
+.ambil-antrian .nama-petugas {
+    padding: 1.5px;
+}
+
+.ambil-antrian .nama-petugas {
+    font-size: 18px;
+}
+
+.header .part-1 #date, .nama-petugas {
+    font-family: 'Open Sans', calibri;
+}
+
+.ambil-antrian .main {
+    height: 80%;
+    background-color: #f2f2f2;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Open Sans', calibri;
+}
+
+.ambil-antrian .main .no-antrian {
+    margin: 4%;
+    height: 80%;
+    width: 65%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ambil-antrian .main .no-antrian .text {
+    height: 20%;
+    width: 100%;
+    align-items: flex-end;
+    padding-left: 4%;
+    font-size: 30px;
+    box-sizing: border-box;
+}
+
+.ambil-antrian .main .no-antrian .no {
+    height: 50%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 180px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.ambil-antrian .main .no-antrian .button {
+    height: 30%;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ambil-antrian .panggil-lagi, .ambil-antrian .selanjutnya {
+    height: 70%;
+    width: 45%;
+    background: #0062a7;
+    border-radius: 8px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.ambil-antrian .ket-antrian {
+    width: 35%;
+    height: 80%;
+    margin: 4%;
+    margin-left: 0;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ambil-antrian .jumlah-antrian {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: #0062a7;
+    width: 100%;
+    height: 27%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-size: 30px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.ambil-antrian #jumlah-antrian {
+    color: #ffef00;
+    font-size: 70px;
+    padding-left: 10%;
+    font-weight: bold;
+}
+
+.ambil-antrian .info-pengunjung {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: flex-start;
+    height: 65%;
+    background-color: #fff;
+    font-size: 20px;
+    overflow: auto;
+}
+
+.ambil-antrian .info-pengunjung table {
+    margin-top: 2%;
+    width: 90%;
+    height: 80%;
+    border-collapse: collapse;
+}
+
+.ambil-antrian .info-pengunjung table tr td {
+    border-bottom: 1px solid lightgrey;
+}
+
+.ambil-antrian .info-pengunjung table tr td:last-child {
+    padding: 5px;
+    overflow: auto;
+}
+
+.ambil-antrian .info-pengunjung table tr td:nth-of-type(2) {
+    padding: 5px;
+}
+
+.ambil-antrian .info-pengunjung table td:first-child {
+    padding-left: 5px;
+}

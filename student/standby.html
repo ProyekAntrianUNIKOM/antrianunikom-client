@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="standByApp">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="public/style/style.css">
@@ -60,18 +61,73 @@
                 };
         });
     </script>
+=======
+	<meta charset="UTF-8">
+	<title>Antrian UNIKOM</title>
+	<link rel="stylesheet" href="public/style/style.css">
+	<script src="js/app/helper.js"></script>
+  <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="js/sweetalert.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script>
+	<script src="lib/angular/angular-cookies.js"></script>
+	<script src="js/app/antrian.js"></script>
+	<script>
+			angular.module('standByApp',['ngCookies'])
+			.controller('standByController',function($scope,$http,$cookieStore,$location){
+					$scope.ambilAntrian=function(){
+							$http({
+											method : "POST",
+											url : base_url+"validasimhs",
+											data:{
+											'no_rfid': $scope.no_rfid
+											}
+							}).success(function(data,status){
+									if(data.status==200){
+											$cookieStore.put('norfid',data.result[0].no_rfid);
+											//console.log($cookieStore.get('norfid'));
+											//$location.path('/step2');
+											document.location.href="home/#/step2";
+									}else{
+											alert('KTM Tidak Terdaftar');
+											$scope.no_rfid = "";
+											swal({
+													title: "Uppss",
+													text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
+													type: "error",
+													confirmButtonText: "OKE",
+													timer:2000
+											});
+									}
+							}).error(function (data,status) {
+									console.log('error : '+status);
+							});
+							};
+			});
+	</script>
+
+	<script type="text/javascript">
+		function ubahfocus(){
+			var form = document.getElementById("rfid");
+			form.focus();
+		}
+
+	</script>
+>>>>>>> a30ea0543e8d3a8a6f6d9a0d800096e58ae2e773
 </head>
 <body onload="times()" ng-controller="standByController">
-    <div id="background"></div>
-    <div id="bg">
+	<div id="background"></div>
+	<div id="bg" class="standby">
 
-        <!-- Header -->
-        <div id="bg-header" class="flex">
-            <h1> Welcome </h1>
-        </div>
+		<!-- Header -->
+		<div id="bg-header" class="flex">
+			<h1> Welcome </h1>
+		</div>
 
-        <!-- slider 475 -->
-        <div id="jssor_1" style="z-index: -1; position: relative; top: 0px; left: 0px; width: 1200px; overflow: hidden; visibility: hidden;">
+		<!-- slider 475 -->
+		<div id="jssor_1" style="z-index: -1; position: relative; top: 0px; left: 0px; width: 1200px; overflow: hidden; visibility: hidden;">
         <div id="slider" data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1200px; overflow: hidden;">
             <div data-p="112.50" class="slider">
                 <img data-u="image" style="width: 1200px;" src="public/img/set-1.jpg" />
@@ -94,25 +150,25 @@
         </div>
     </div>
 
-        <!-- Footer -->
-        <div id="footer" class="flex" style="background-color: rgba(255, 255, 255, 0.9);">
-            <div id="footer-time"></div>
-            <marquee>
-                UNIVERSITAS KOMPUTER INDONESIA
-            </marquee>
-        </div>
+		<!-- Footer -->
+		<div id="footer" class="flex" style="background-color: rgba(255, 255, 255, 0.9);">
+			<div id="footer-time"></div>
+			<marquee>
+				UNIVERSITAS KOMPUTER INDONESIA
+			</marquee>
+		</div>
 
         <div id="frame">
-            <img src="public/img/frameset.png" alt="">
+            <img src="public/img/frameset2.png" alt="">
         </div>
-        <div id="form">
+				<div id="form">
              <form ng-submit="ambilAntrian()">
-                <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" autofocus style="position:fixed;bottom:-1000">
+                <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" onfocusout="ubahfocus()" autofocus style="position:fixed;bottom:-1000">
             </form>
         </div>
-    </div>
+	</div>
 
-    <div id="cont-logo-stnd" class="flex">
+	<div id="cont-logo-stnd" class="flex">
         <img id="logo-stnd" src="public/img/logo.png" height="115" alt="Logo">
     </div>
 
@@ -125,7 +181,6 @@
         </div>
     </div>
         <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-        <script src="js/moment.js"></script>
         <script type="text/javascript" src="public/script/client.js"></script>
         <script src="js/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
         <script type="text/javascript">

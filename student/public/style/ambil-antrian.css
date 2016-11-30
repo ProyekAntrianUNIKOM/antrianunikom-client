@@ -99,6 +99,7 @@
     box-sizing: border-box;
     justify-content: space-around;
     align-items: center;
+    font-family: 'Montserrat', calibri;
 }
 
 .ambil-antrian .panggil-lagi, .ambil-antrian .selanjutnya {

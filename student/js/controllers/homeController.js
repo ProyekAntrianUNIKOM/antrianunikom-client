@@ -15,14 +15,14 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
        loginService.login(user,$scope); // call login service
    }
 
-    operatorService.terakhir(sessionService.get("id_pelayanan")).then(function(response){
-        var data = response.data.result;
-        console.log(data);
-        $scope.noloket = sessionService.get("loket");
-        $scope.nomor = data[0].no_antrian;
-        $scope.noarray=$scope.nomor.split("");
-        $cookieStore.put('id_antrian',data[0].id_antrian);
-    });
+    // operatorService.terakhir(sessionService.get("id_pelayanan")).then(function(response){
+    //     var data = response.data.result;
+    //     console.log(data);
+    //     $scope.noloket = sessionService.get("loket");
+    //     $scope.nomor = data[0].no_antrian;
+    //     $scope.noarray=$scope.nomor.split("");
+    //     $cookieStore.put('id_antrian',data[0].id_antrian);
+    // });
 
     function playsound(i,j,nomor){
       if(i<nomor.length) {
@@ -55,23 +55,38 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
      $interval(getjumantrian, 1000);
 
     $scope.selanjutnya = function(){
+        console.log('Testing : '+$cookieStore.get("id_antrian"));
         $http.get(base_url+"getantrian/"+sessionService.get("id_pelayanan")).success(function (data,status) {
             if(data.status==400){
                 alert('ANTRIAN KOSONG');
             }else{
                 console.log(data);
+                if($cookieStore.get("id_antrian")>0){
+                  var kirim ={
+                    id_antrian :$cookieStore.get("id_antrian")
+                  }
+
+                  $http.post(base_url+"antrian/terlayani",kirim).success(function(data,status){
+                    //alert('Berhasil update waktu terlayani');
+                  }).error(function(data){
+                    document.write(data);
+                  });
+                }
+                
                 var datakirim = {
                   id_antrian : data.result[0].id_antrian,
                   operator:sessionService.get('operator'),
                   loket:sessionService.get("loket")
                 }
-                console.log(datakirim);
+                //console.log(datakirim);
                   
                   $http.post(base_url+"antrian/selesai",datakirim).error(function (data) {
                       document.write(data);
-                      console.log(datakirim);
+                      //console.log(datakirim);
                   }).success(function(data,status){
                       if(data.status==200){
+                            $cookieStore.put('id_antrian',data.id_antrian);
+                            console.log('Id antrian : '+data.id_antrian);
                             $scope.nomor=data.result;
                             $scope.antriansekarang = "NIM : "+data.nim+"\n Nama : "+data.nama+"\n Prodi : "+data.prodi;
                             $scope.antriansekarangNIM = data.nim;

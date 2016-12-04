@@ -1,67 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="standByApp">
 <head>
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="public/style/style.css">
-    <script src="js/app/helper.js"></script>
 
-    <script src="js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
-    <script src="js/bootstrap.js"></script>
-
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular/angular-route.js"></script>
-    <script src="lib/angular/angular-cookies.js"></script>
-    <script src="js/app/antrian.js"></script>
-
-    <script>
-        angular.module('standByApp',['ngCookies'])
-        .controller('standByController',function($scope,$http,$cookieStore,$location){
-            $scope.ambilAntrian=function(){
-                $http({
-                        method : "POST",
-                        url : base_url+"validasimhs",
-                        data:{
-                        'no_rfid': $scope.no_rfid
-                        }
-                }).success(function(data,status){
-                  var d = new Date();
-                  var h = checkTime(d.getHours());
-                  var m = checkTime(d.getMinutes());
-                    if(data.status==200){
-                        if(h+""+m > 1530) {
-                          swal({
-                              title: "Uppss",
-                              text: "MOHON MAAF SUDAH MELEBIHI BATAS JAM KERJA",
-                              type: "error",
-                              confirmButtonText: "OKE",
-                              timer:2000
-                          });
-                        }else {
-                          $cookieStore.put('norfid',data.result[0].no_rfid);
-                          //console.log($cookieStore.get('norfid'));
-                          //$location.path('/step2');
-                          document.location.href="home/#/step2";
-                        }
-                    }else{
-                        $scope.no_rfid = "";
-                        swal({
-                            title: "Uppss",
-                            text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
-                            type: "error",
-                            confirmButtonText: "OKE",
-                            timer:2000
-                        });
-                    }
-                }).error(function (data,status) {
-                    console.log('error : '+status);
-                });
-                };
-        });
-    </script>
-=======
 	<meta charset="UTF-8">
 	<title>Antrian UNIKOM</title>
 	<link rel="stylesheet" href="public/style/style.css">
@@ -115,7 +55,7 @@
 		}
 
 	</script>
->>>>>>> a30ea0543e8d3a8a6f6d9a0d800096e58ae2e773
+
 </head>
 <body onload="times()" ng-controller="standByController">
 	<div id="background"></div>

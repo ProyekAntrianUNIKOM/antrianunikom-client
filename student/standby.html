@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="standByApp">
 <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/style/style.css">
+    <script src="js/app/helper.js"></script>
 
-	<meta charset="UTF-8">
-	<title>Antrian UNIKOM</title>
-	<link rel="stylesheet" href="public/style/style.css">
-	<script src="js/app/helper.js"></script>
-  <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-	<script src="js/sweetalert.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <script src="js/bootstrap.js"></script>
 
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular/angular-route.js"></script>
-	<script src="lib/angular/angular-cookies.js"></script>
-	<script src="js/app/antrian.js"></script>
-	<script>
-			angular.module('standByApp',['ngCookies'])
-			.controller('standByController',function($scope,$http,$cookieStore,$location){
-					$scope.ambilAntrian=function(){
-							$http({
-											method : "POST",
-											url : base_url+"validasimhs",
-											data:{
-											'no_rfid': $scope.no_rfid
-											}
-							}).success(function(data,status){
-									if(data.status==200){
-											$cookieStore.put('norfid',data.result[0].no_rfid);
-											//console.log($cookieStore.get('norfid'));
-											//$location.path('/step2');
-											document.location.href="home/#/step2";
-									}else{
-											alert('KTM Tidak Terdaftar');
-											$scope.no_rfid = "";
-											swal({
-													title: "Uppss",
-													text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
-													type: "error",
-													confirmButtonText: "OKE",
-													timer:2000
-											});
-									}
-							}).error(function (data,status) {
-									console.log('error : '+status);
-							});
-							};
-			});
-	</script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="lib/angular/angular-cookies.js"></script>
+    <script src="js/app/antrian.js"></script>
 
-	<script type="text/javascript">
-		function ubahfocus(){
-			var form = document.getElementById("rfid");
-			form.focus();
-		}
+    <script>
+        angular.module('standByApp',['ngCookies'])
+        .controller('standByController',function($scope,$http,$cookieStore,$location){
+            $scope.ambilAntrian=function(){
+                $http({
+                        method : "POST",
+                        url : base_url+"validasimhs",
+                        data:{
+                        'no_rfid': $scope.no_rfid
+                        }
+                }).success(function(data,status){
+                  var d = new Date();
+                  var h = checkTime(d.getHours());
+                  var m = checkTime(d.getMinutes());
+                    if(data.status==200){
+                        if(h+""+m > 1530) {
+                          swal({
+                              title: "Uppss",
+                              text: "MOHON MAAF SUDAH MELEBIHI BATAS JAM KERJA",
+                              type: "error",
+                              confirmButtonText: "OKE",
+                              timer:2000
+                          });
+                        }else {
+                          $cookieStore.put('norfid',data.result[0].no_rfid);
+                          //console.log($cookieStore.get('norfid'));
+                          //$location.path('/step2');
+                          document.location.href="home/#/step2";
+                        }
+                    }else{
+                        $scope.no_rfid = "";
+                        swal({
+                            title: "Uppss",
+                            text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
+                            type: "error",
+                            confirmButtonText: "OKE",
+                            timer:2000
+                        });
+                    }
+                }).error(function (data,status) {
+                    console.log('error : '+status);
+                });
+                };
+        });
+    </script>
+    <script type="text/javascript">
+  		function ubahfocus(){
+  			var form = document.getElementById("rfid");
+  			form.focus();
+  		}
 
-	</script>
-
+  	</script>
 </head>
 <body onload="times()" ng-controller="standByController">
 	<div id="background"></div>
@@ -69,24 +80,7 @@
 		<!-- slider 475 -->
 		<div id="jssor_1" style="z-index: -1; position: relative; top: 0px; left: 0px; width: 1200px; overflow: hidden; visibility: hidden;">
         <div id="slider" data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1200px; overflow: hidden;">
-            <div data-p="112.50" class="slider">
-                <img data-u="image" style="width: 1200px;" src="public/img/set-1.jpg" />
-                <div class="caption">
-                  <p>PERESMIAN GEDUNG BARU UNIKOM</p>
-                </div>
-            </div>
-            <div data-p="112.50" class="slider" style="display: none;">
-                <img data-u="image" src="public/img/set-2.jpg" />
-                <div class="caption">
-                  <p>GEDUNG BARU UNIKOM</p>
-                </div>
-            </div>
-            <div data-p="112.50" class="slider" style="display: none;">
-                <img data-u="image" src="public/img/set-3.png" />
-                <div class="caption">
-                  <p>2 WINNER MICROSOFT IMAGINE CUP 2015</p>
-                </div>
-            </div>
+
         </div>
     </div>
 
@@ -124,8 +118,12 @@
         <script type="text/javascript" src="public/script/client.js"></script>
         <script src="js/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
         <script type="text/javascript">
+                var host = "http://"+window.location.host;
+                var base_url_file  = host+"/apiantrian/public/banner/";
                 jQuery(document).ready(function ($) {
+
                     $(window).on('load', function(){
+
                         var heightInPercent = 0.73;
                         var fullScreen = Math.ceil(window.screen.height * heightInPercent);
                         var size = ($(window).height() * heightInPercent) + 'px';
@@ -143,17 +141,19 @@
                                 {$Duration:1000,x:-0.2,$Delay:40,$Cols:12,$SlideOut:true,$Formation:$JssorSlideshowFormations$.$FormationStraight,$Assembly:260,$Easing:{$Left:$Jease$.$InOutExpo,$Opacity:$Jease$.$InOutQuad},$Opacity:2,$Outside:true,$Round:{$Top:0.5}},
                                 {$Duration:2000,y:-1,$Delay:60,$Cols:15,$SlideOut:true,$Formation:$JssorSlideshowFormations$.$FormationStraight,$Easing:$Jease$.$OutJump,$Round:{$Top:1.5}}
                             ];
-
-                            var jssor_1_options = {
-                                $AutoPlay: true,
-                                $SlideshowOptions: {
-                                    $Class: $JssorSlideshowRunner$,
-                                    $Transitions: jssor_1_SlideshowTransitions,
-                                    $TransitionsOrder: 1
-                                },
-                                $Idle: 7000,
-                                $SlideHeight: fullScreen//sHeight
-                            };
+                            jssor_slider1_starter = function (containerId) {
+                              var jssor_1_options = {
+                                  $AutoPlay: true,
+                                  $SlideshowOptions: {
+                                      $Class: $JssorSlideshowRunner$,
+                                      $Transitions: jssor_1_SlideshowTransitions,
+                                      $TransitionsOrder: 1
+                                  },
+                                  $Idle: 7000,
+                                  $SlideHeight: fullScreen//sHeight
+                              };
+                              var jssor_slider1 = new $JssorSlider$(containerId, jssor_1_options);
+                            }
 
                             function update(){
                                 size = ($(window).height() * heightInPercent) + 'px';
@@ -171,8 +171,26 @@
 
                             //-- update size when resize --
                             $(window).on('resize', function(){ update(); });
-
-                            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+                            $.ajax({
+                              type: 'GET',
+                              url: base_url+'banner',
+                              dataType: 'json',
+                              success: function (data) {
+                                jQuery.each(data.result, function(index, element) {
+                                  var a = '<div data-p="112.50" class="slider">'+
+                                              '<img data-u="image" src="'+base_url_file+element.banner_img+'" />'+
+                                              '<div class="caption">'+
+                                                '<p>'+element.judul+'</p>'+
+                                              '</div>'+
+                                          '</div>';
+                                  $('#slider').append(a);
+                                });
+                                jssor_slider1_starter('jssor_1');
+                              },
+                              error: function (xhr, ajaxOptions, thrownError) {
+                                console.log(thrownError);
+                              }
+                            });
                     });
                 });
         </script>

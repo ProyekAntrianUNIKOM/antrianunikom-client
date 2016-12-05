@@ -83,11 +83,6 @@
         <div id="frame">
             <img src="../student/public/img/frameset2.png" alt="">
         </div>
-				<div id="form">
-             <form ng-submit="ambilAntrian()">
-                <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" autofocus style="position:fixed;bottom:-1000">
-            </form>
-        </div>
 	</div>
 
 	<div id="cont-logo-stnd" class="flex">
@@ -152,7 +147,6 @@
 							$('#jssor_1 img').css("height", size);
 							var cHeight = $(window).height()
 							var temp = (cHeight - 641) + '%';
-							console.log(temp);
 							if (sHeight == fullScreen) {
 								$('.caption').css("margin-bottom", "0");
 							} else {

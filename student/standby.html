@@ -171,7 +171,6 @@
 
                             //-- update size when resize --
                             $(window).on('resize', function(){ update(); });
-                            var jssor_1_slider;
                             $.ajax({
                               type: 'GET',
                               url: base_url+'banner',
@@ -181,12 +180,12 @@
                                   var a = '<div data-p="112.50" class="slider">'+
                                               '<img data-u="image" src="'+base_url_file+element.banner_img+'" />'+
                                               '<div class="caption">'+
-                                                '<p>GEDUNG BARU UNIKOM</p>'+
+                                                '<p>'+element.judul+'</p>'+
                                               '</div>'+
                                           '</div>';
                                   $('#slider').append(a);
-                                  jssor_slider1_starter('jssor_1');
                                 });
+                                jssor_slider1_starter('jssor_1');
                               },
                               error: function (xhr, ajaxOptions, thrownError) {
                                 console.log(thrownError);

@@ -60,7 +60,17 @@ angular.module('mainApp.controllers', ['ngCookies']).
       $scope.ambil = true;
 
       $scope.kembali=function(){
-          document.location.href="../standby.html";
+          console.log($scope.ambil);
+          if($scope.ambil==true){
+              document.location.href="../standby.html";
+          } else if($scope.pelayanan==true){
+            $scope.pelayanan=false;
+            $scope.ambil=true;
+          } else {
+            $scope.subpelayanan=false;
+            $scope.pelayanan=true;
+          }
+
       };
       $scope.close = function(){
         document.getElementById('modal').style.display = 'none';
@@ -100,7 +110,7 @@ angular.module('mainApp.controllers', ['ngCookies']).
            $http.get(base_url+"pelayanan/"+$id).success(function(data,status){
               if(data.result.length>0)
               {
-                $scope.ambil=false; 
+                $scope.ambil=false;
                 $scope.pelayanan=true;
                 $scope.data_pelayanan=data.result;
               }else {
@@ -109,7 +119,7 @@ angular.module('mainApp.controllers', ['ngCookies']).
            });
       }
 
-      //ambil sub pelayanan 
+      //ambil sub pelayanan
       $scope.pilihpelayanan = function($id,$nama){
         $http.get(base_url+'subpelayanan/'+$id).success(function(data,status){
           $scope.nama_layanan = $nama;
@@ -117,9 +127,9 @@ angular.module('mainApp.controllers', ['ngCookies']).
           if(data.result.length>0){
             $scope.data_subpelayanan=data.result;
             $scope.subpelayanan = true;
-            $scope.pelayanan = false; 
+            $scope.pelayanan = false;
           }else {
-          
+
             $scope.getnomorantrian();
           }
         }).error(function(err){
@@ -127,10 +137,10 @@ angular.module('mainApp.controllers', ['ngCookies']).
         })
       }
 
-      //pilih sub pelayanan 
+      //pilih sub pelayanan
       $scope.pilihsubpelayanan = function($id,$nama){
-        var namadulu = $cookieStore.get("nama_pelayanan"); 
-        var namasekarang = namadulu +" "+$nama; 
+        var namadulu = $cookieStore.get("nama_pelayanan");
+        var namasekarang = namadulu +" "+$nama;
         $scope.nama_layanan = $nama;
         $cookieStore.put("nama_pelayanan",namasekarang);
         $scope.getnomorantrian();

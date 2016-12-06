@@ -47,12 +47,17 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
         for (var i=0; i<data.result.length; i++) {
           jumlah.push(data.result[i].jumlah);
         }
+        console.log(data.result.length);
+        if(data.result.length==0){
+          $scope.msg = 'Data not found.';
+        }else{
+          $scope.msg = '';
+        }
       }).error(function (data, status, header, config) {
         console.log(data);
     });
     $scope.labels = operator;
     $scope.series = ['Antrian Terlayani'];
-
     $scope.data = [jumlah];
   }
 

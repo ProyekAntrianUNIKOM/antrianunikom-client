@@ -41,6 +41,61 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     $scope.panggilAntrian = function(){
       //definisikan suara
+      var sekarang = parseInt($scope.nomor);
+      if(sekarang>0){
+        var suara = new Array();
+        suara.push("nomor-urut");
+
+        var ratus = Math.floor(sekarang / 100);
+        var sisa  = sekarang % 100;
+        var puluh = Math.floor(sisa / 10);
+        var satuan = sisa % 10;
+        console.log(sekarang);
+        console.log(ratus);
+        console.log(sisa);
+        console.log(puluh);
+        console.log(satuan);
+
+        if(sekarang<10) {
+          suara.push(sekarang);
+        } else {
+        //  console.log('masuk kesini');
+          //cek ratusan
+          if(ratus>0){
+            if(ratus==1){
+              suara.push('seratus');
+
+            } else {
+            suara.push(ratus);
+            suara.push('ratus');
+          }
+        }
+
+            if(sisa>0) {
+              if(sisa < 20){
+                if(sisa==10){
+                  suara.push("sepuluh");
+                }else if(sisa==11) {
+                  suara.push("sebelas");
+                } else {
+                  suara.push(satuan);
+                  suara.push("belas");
+                }
+              } else {
+                suara.push(puluh);
+                suara.push("puluh");
+                if(satuan>0) {
+                  suara.push(satuan);
+                }
+              }
+            }
+        }
+        suara.push("loket");
+        suara.push(sessionService.get('loket'));
+        playsound(0,2,suara);
+      } else {
+        alert('Silahkan panggil antrian terlebih dahulu!!');
+      }
 
 
   }
@@ -72,14 +127,14 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                     document.write(data);
                   });
                 }
-                
+
                 var datakirim = {
                   id_antrian : data.result[0].id_antrian,
                   operator:sessionService.get('operator'),
                   loket:sessionService.get("loket")
                 }
                 //console.log(datakirim);
-                  
+
                   $http.post(base_url+"antrian/selesai",datakirim).error(function (data) {
                       document.write(data);
                       //console.log(datakirim);

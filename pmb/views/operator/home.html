@@ -1,56 +1,65 @@
-<script></script>
-<div id="background"></div>
-	<div id="bg" class="ambil-antrian">
+<div class="ambil-antrian">
+		<div class="header flex">
+				<div class="part-1 flex">
+						<div class="logo" style="height: 75%; width: 110px; margin: 2%;">
+								<img src="../public/img/logo.png" height="100%" alt="logo">
+						</div>
+						<div class="text">
+								<div class="label-1" >Biro Administrasi Umum</div>
+								<div class="label-2">Universitas Komputer Indonesia</div>
 
-		<!-- Header -->
-		<div id="bg-header" class="flex">
-			<h1> LOKET {{noloket}} ({{nama_pelayanan | uppercase}}) </h1>
+						</div>
+				</div>
+				<div class="part-2 flex">
+						<div class="nama-loket">Loket {{noloket}} PMB</div>
+						<div class="nama-petugas">{{nama_operator}}</div>
+				</div>
 		</div>
 
+		<div class="main flex">
+				<div class="no-antrian">
+						<div class="text flex">Antrian No. : </div>
+						<div class="no flex">{{nomor}}</div>
+						<div class="button flex">
+								<div class="panggil-lagi flex" ng-click="panggilAntrian()">PANGGIL LAGI</div>
+								<div class="selanjutnya flex" ng-click="selanjutnya()">SELANJUTNYA</div>
+						</div>
+				</div>
 
-		<!-- main -->
-		<div id="bg-main" class="flex">
-			<div id="bg-row" class="flex">
-              <span ng-bind="nomor"></span>
-			</div>
+				<div class="ket-antrian flex">
+						<div class="jumlah-antrian flex">
+								<p>Jumlah Antrian : </p>
+								<span id="jumlah-antrian">{{jumAntrian}}</span>
+						</div>
 
-			<div id="tes">
-					{{antriansekarang}}
-			</div>
-			<div ng-bind="jumAntrian"></div>
+						<div class="info-pengunjung flex">
+								<table>
+										<tr>
+												<td colspan="3">Info Pengunjung</td>
+										</tr>
+										<tr>
+												<td>Jenis Pelayanan</td>
+												<td>:</td>
+												<td id="prodi">{{antriansekarangJenispelayanan}}</td>
+										</tr>
+										<tr>
+												<td>NIM</td>
+												<td>:</td>
+												<td id="nim">{{antriansekarangNIM}}</td>
+										</tr>
+										<tr>
+												<td>Nama</td>
+												<td>:</td>
+												<td id="nama">{{antriansekarangNAMA}}</td>
+										</tr>
+										<tr>
+												<td>Prodi</td>
+												<td>:</td>
+												<td id="prodi">{{antriansekarangPRODI}}</td>
+										</tr>
 
+								</table>
+						</div>
+				</div>
 		</div>
-
-
-		<!-- Footer -->
-		<div id="footer" class="flex">
-
-			<a href="" id="call" class="flex" ng-click="panggilAntrian()">
-                PANGGIL LAGI
-            </a>
-            <a href="#" id="next" class="flex" ng-click="selanjutnya()">
-                SELANJUTNYA
-            </a>
-            <a href="#" id="next" class="flex" ng-click="logout()">
-                LOGOUT
-            </a>
-		</div>
-	</div>
-	<audio id="nomorurut" src="../public/sound/nomor-urut.wav"  ></audio>
-	<audio id="loket" src="../public/sound/loket.wav"  ></audio>
-
-	<audio id="belas" src="../public/sound/belas.wav"  ></audio>
-	<audio id="sebelas" src="../public/sound/sebelas.wav"  ></audio>
-	<audio id="puluh" src="../public/sound/puluh.wav"  ></audio>
-	<audio id="sepuluh" src="../public/sound/sepuluh.wav"  ></audio>
-	<audio id="ratus" src="../public/sound/ratus.wav"  ></audio>
-	<audio id="seratus" src="../public/sound/seratus.wav"  ></audio>
-	<audio id="1" src="../public/sound/1.wav"  ></audio>
-	<audio id="2" src="../public/sound/2.wav"  ></audio>
-	<audio id="3" src="../public/sound/3.wav"  ></audio>
-	<audio id="4" src="../public/sound/4.wav"  ></audio>
-	<audio id="5" src="../public/sound/5.wav"  ></audio>
-	<audio id="6" src="../public/sound/6.wav"  ></audio>
-	<audio id="7" src="../public/sound/7.wav"  ></audio>
-	<audio id="8" src="../public/sound/8.wav"  ></audio>
-	<audio id="9" src="../public/sound/9.wav"  ></audio>
+</div>

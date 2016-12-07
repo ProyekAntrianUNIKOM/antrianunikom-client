@@ -31,7 +31,7 @@
                     </div>
                     <div class="antrian-active flex">
                         <div class="nomor">
-													<span class="nomor-antrian" id="5">-</span>
+													<span class="nomor-antrian" id="8">-</span>
 												</div>
                     </div>
                 </div>
@@ -41,26 +41,26 @@
             </div>
 
 			<!-- loket bawah / yang lagi aktif -->
-            <div class="queue flex">
-                <div id="loket-1" class="loket flex">
-					<div class="nama-loket">
-						<span class="kode-1">LOKET</span>
-						<span class="kode-2">1</span>
-					</div>
-					<div class="nomor">
-					   <span class="nomor-antrian" id="1">101</span>
-					</div>
-                </div>
+        <div class="queue flex">
+          <div id="loket-1" class="loket flex">
+						<div class="nama-loket">
+							<span class="kode-1">LOKET</span>
+							<span class="kode-2">1</span>
+						</div>
+						<div class="nomor">
+						   <span class="nomor-antrian" id="1">101</span>
+						</div>
+          </div>
 
-                <div id="loket-2" class="loket flex">
-					<div class="nama-loket">
-						<span class="kode-1">LOKET</span>
-						<span class="kode-2" >2</span>
-					</div>
-					<div class="nomor">
-						<span class="nomor-antrian" id="2">061</span>
-					</div>
-                </div>
+          <div id="loket-2" class="loket flex">
+							<div class="nama-loket">
+								<span class="kode-1">LOKET</span>
+								<span class="kode-2" >2</span>
+							</div>
+							<div class="nomor">
+								<span class="nomor-antrian" id="2">061</span>
+							</div>
+          </div>
 
                 <div id="loket-3" class="loket flex">
 					<div class="nama-loket">
@@ -81,6 +81,37 @@
 						<span class="nomor-antrian" id="4">051</span>
 					</div>
         </div>
+
+				<div id="loket-5" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">5</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="5">051</span>
+					</div>
+        </div>
+
+				<div id="loket-6" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">6</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="6">051</span>
+					</div>
+        </div>
+
+				<div id="loket-7" class="loket flex">
+					<div class="nama-loket">
+						<span class="kode-1">LOKET</span>
+						<span class="kode-2">7</span>
+					</div>
+					<div class="nomor">
+						<span class="nomor-antrian" id="7">051</span>
+					</div>
+        </div>
+
             </div>
         </div>
 
@@ -116,7 +147,7 @@
 		function loaddata(){
              var host = window.location.host;
               $.ajax({
-                  url:'http://'+host+"/apiantrian/public/api/v1/temp",
+                  url:'http://'+host+"/apiantrian/public/api/v1/antrianpmb/temp",
                   timeout: 1000,
                   type: "GET",
                   dataType: 'json',
@@ -130,6 +161,12 @@
 										$("#4").html(data.result[3].no_antrian);
 
 										$("#5").html(data.result[4].no_antrian);
+
+										$("#6").html(data.result[5].no_antrian);
+
+										$("#7").html(data.result[6].no_antrian);
+
+										$("#8").html(data.result[7].no_antrian);
 
 									}
               });

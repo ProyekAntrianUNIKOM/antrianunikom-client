@@ -3,7 +3,7 @@ var obj = new Array();
 app.factory('loginService',function($http,$location,$q,sessionService,base_url){
     return{
         login:function (user,scope) {
-           var $promise=$http.post(base_url+'auth',user); //send data
+           var $promise=$http.post(base_url+'antrianpmb/auth',user); //send data
             $promise
                 .success(function(data,status){
                     if(data.status==200){

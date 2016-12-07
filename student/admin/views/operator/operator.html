@@ -30,15 +30,15 @@
             <tr>
               <th>#</th>
               <th>Nama Operator</th>
-              <th>Nama Loket</th>
+              <th>Pelayanan</th>
               <th>action</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="operator in operatordata">
-              <th scope="row">1</th>
+              <th scope="row">{{operator.id_operator}}</th>
               <td>{{operator.nama_operator}}</td>
-              <td>{{operator.nama_loket}}</td>
+              <td>{{operator.nama_pelayanan}}</td>
               <td><a ng-href="#/operator/detail/{{operator.id_operator}}" class="btn btn-primary btn-sm">History</td>
             </tr>
           </tbody>

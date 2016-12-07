@@ -4,10 +4,33 @@
 var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-input','summernote','ngAnimate']).controller("chartcont", function ($scope,$http) {
   var host = "http://"+window.location.host;
   var base_url  = host+"/apiantrian/public/api/v1/";
-  var operator = [];
-  var jumlah = [];
+
+  //History Loket
+  $scope.tahunvLoketD = '-';
+  $scope.bulanvLoketD = '-';
+  var no_loket = [];
+  var jumlahLoketD = [];
+  $http.get(base_url+'history/loket')
+    .success(function (data, status, headers, config) {
+      for (var i=0; i<data.result.length; i++) {
+        no_loket.push('Loket - '+data.result[i].no_loket);
+      }
+      for (var i=0; i<data.result.length; i++) {
+        jumlahLoketD.push(data.result[i].jumlah);
+      }
+    }).error(function (data, status, header, config) {
+      console.log(data);
+  });
+  $scope.labelsLoketD = no_loket;
+  $scope.colorsLoketD = [{backgroundColor:[ '#f7464a', '#00ADF9','#97bbcd', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']}];
+
+  $scope.dataLoketD = [jumlahLoketD];
+
+  //History Operator
   $scope.tahunv = '-';
   $scope.bulanv = '-';
+  var operator = [];
+  var jumlah = [];
   $http.post(base_url+'historyall')
     .success(function (data, status, headers, config) {
       for (var i=0; i<data.result.length; i++) {
@@ -20,6 +43,7 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
       console.log(data);
   });
   $scope.labels = operator;
+  $scope.colors = [{backgroundColor:[ '#f7464a', '#00ADF9','#97bbcd', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']}];
   $scope.series = ['Antrian Terlayani'];
 
   $scope.data = [jumlah];
@@ -61,6 +85,62 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
     $scope.data = [jumlah];
   }
 
+  //History Loket
+  $scope.tahunvLoket = '-';
+  $scope.bulanvLoket = '-';
+  var nama_pelayanan = [];
+  var jumlahLoket = [];
+  $http.post(base_url+'history/pelayanan')
+    .success(function (data, status, headers, config) {
+      for (var i=0; i<data.result.length; i++) {
+        nama_pelayanan.push(data.result[i].nama_pelayanan);
+      }
+      for (var i=0; i<data.result.length; i++) {
+        jumlahLoket.push(data.result[i].jumlah);
+      }
+    }).error(function (data, status, header, config) {
+      console.log(data);
+  });
+  $scope.labelsLoket = nama_pelayanan;
+  $scope.colorsLoket = [{backgroundColor:["#f7464a","#97bbcd","#dcdcdc"]}];
+  $scope.dataLoket = [jumlahLoket];
+
+  $scope.SendDataLoket = function () {
+    $scope.tahunvLoket = $scope.tahunLoket;
+    $scope.tahunvLoket = $scope.bulanLoket;
+    var data = $.param({
+      tahun: $scope.tahunLoket,
+      bulan: $scope.bulanLoket
+    });
+
+    var config = {
+      headers : {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      }
+    }
+    var nama_pelayanan = [];
+    var jumlahLoket = [];
+    $http.post(base_url+'history/pelayanan', data, config)
+      .success(function (data, status, headers, config) {
+        for (var i=0; i<data.result.length; i++) {
+          nama_pelayanan.push(data.result[i].nama_pelayanan);
+        }
+        for (var i=0; i<data.result.length; i++) {
+          jumlahLoket.push(data.result[i].jumlah);
+        }
+        if(data.result.length==0){
+          $scope.msgLoket = 'Data not found.';
+        }else{
+          $scope.msgLoket = '';
+        }
+      }).error(function (data, status, header, config) {
+        console.log(data);
+    });
+    $scope.labelsLoket = nama_pelayanan;
+    $scope.colorsLoket = [{backgroundColor:["#f7464a","#97bbcd","#dcdcdc"]}];
+    $scope.dataLoket = [jumlahLoket];
+  }
+
 }).controller("nav", function ($scope,sessionService,$http,$location) {
   $scope.logout = function() {
     sessionService.destroy('id_admin');
@@ -70,6 +150,10 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
   $scope.username = sessionService.get('username');
 }).controller("head",function($scope,$http){
   $http.get(base_url+'history/loket').success(function(data){
+    // var icon = [''];
+    // for (var i = 0; i < data.result.length; i++) {
+    //   data.result[i].icon =
+    // }
     $scope.loketdata = data.result;
   }).error(function(data){
     console.error(data);

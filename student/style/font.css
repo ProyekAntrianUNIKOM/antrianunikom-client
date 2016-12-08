@@ -1,0 +1,25 @@
+@-webkit-font-face {
+    font-family: 'Montserrat';
+    src: url('../font/Montserrat.eot');
+    src: url('../font/Montserrat.woff') format('woff'),
+         url('../font/Montserrat.woff2') format('woff2'),
+         url('../font/Montserrat-Regular.otf'),
+         url('../font/Montserrat-Regular.ttf') format('truetype');
+}
+
+@-webkit-font-face {
+    font-family: 'Lobster';
+    src: url('../font/Lobster.eot') format('eot');
+    src: url('../font/Lobster.woff') format('woff'),
+         url('../font/Lobster.woff2') format('woff2'),
+         url('../font/Lobster-Regular.otf'),
+         url('../font/Lobster.ttf') format('truetype');
+}
+
+@-webkit-font-face {
+    font-family: 'Open Sans';
+    src: url('../font/Open-Sans.eot') format('eot');
+    src: url('../font/Open-Sans.woff') format('woff'),
+         url('../font/Open-Sans.woff2') format('woff2'),
+         url('../font/Open-Sans.ttf') format('truetype');
+}

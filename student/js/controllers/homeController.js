@@ -1,4 +1,6 @@
 'use strict';
+var $ = function(val){ return document.getElementById(val); };
+var $$ = function(val){ return document.querySelectorAll(val); };
 app.controller('OperatorController',function($scope,operatorService,$interval,sessionService,loginService,$http,$cookieStore){
 
     $scope.antriansekarang="";
@@ -7,11 +9,23 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
     $scope.nama_operator = sessionService.get("nama");
     $scope.id_peyanan = sessionService.get("id_pelayanan");
     $scope.nama_pelayanan = sessionService.get("nama_pelayanan");
-    $scope.logout = function(){
+    $scope.logoutya = function(){
       loginService.logout();
     }
-    $scope.msgText="";
-    $scope.login = function(user){
+    $scope.logout = function(){
+      //
+        //-- modal --
+        $$('.modal-container')[0].style.display = 'flex';
+        $$('.box')[0].style.display = 'flex';
+        $$('.modal-container')[0].style.backgroundColor = 'rgba(0,0,0,0.7)';
+    }
+    $scope.tidak = function(){
+         $$('.box')[0].style.display = 'none';
+         $$('.modal-container')[0].style.display = 'none';
+         $$('.modal-container')[0].style.backgroundColor = 'rgba(0,0,0,0)';
+    }
+      $scope.msgText="";
+      $scope.login = function(user){
        loginService.login(user,$scope); // call login service
    }
 
@@ -102,7 +116,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
     $scope.jumAntrian ="0";
     function getjumantrian(){
-      $http.get(base_url+'getantrian/'+sessionService.get("id_pelayanan")).success(function(data,status){
+      $http.get(base_url+'antrianpmb/getantrian').success(function(data,status){
       var jum = data.result.length;
       $scope.jumAntrian = jum;
     });
@@ -110,18 +124,16 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
      $interval(getjumantrian, 1000);
 
     $scope.selanjutnya = function(){
-        console.log('Testing : '+$cookieStore.get("id_antrian"));
-        $http.get(base_url+"getantrian/"+sessionService.get("id_pelayanan")).success(function (data,status) {
-            if(data.status==400){
+        $http.get(base_url+"antrianpmb/getantrian").success(function (data,status) {
+            if(data.result.length==0){
                 alert('ANTRIAN KOSONG');
             }else{
-                console.log(data);
                 if($cookieStore.get("id_antrian")>0){
                   var kirim ={
                     id_antrian :$cookieStore.get("id_antrian")
                   }
-
-                  $http.post(base_url+"antrian/terlayani",kirim).success(function(data,status){
+                  //update waktu terlayani
+                  $http.post(base_url+"antrianpmb/terlayani",kirim).success(function(data,status){
                     //alert('Berhasil update waktu terlayani');
                   }).error(function(data){
                     document.write(data);
@@ -133,21 +145,19 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                   operator:sessionService.get('operator'),
                   loket:sessionService.get("loket")
                 }
-                //console.log(datakirim);
 
-                  $http.post(base_url+"antrian/selesai",datakirim).error(function (data) {
+                console.log(datakirim);
+
+
+                  $http.post(base_url+"antrianpmb/selesai",datakirim).error(function (data) {
                       document.write(data);
                       //console.log(datakirim);
                   }).success(function(data,status){
+                    console.log(data);
                       if(data.status==200){
                             $cookieStore.put('id_antrian',data.id_antrian);
                             console.log('Id antrian : '+data.id_antrian);
                             $scope.nomor=data.result;
-                            $scope.antriansekarang = "NIM : "+data.nim+"\n Nama : "+data.nama+"\n Prodi : "+data.prodi;
-                            $scope.antriansekarangNIM = data.nim;
-                            $scope.antriansekarangNAMA = data.nama;
-                            $scope.antriansekarangPRODI = data.prodi;
-                            $scope.antriansekarangJenispelayanan = data.nama_pelayanan;
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
                             var suara = new Array();
@@ -203,11 +213,9 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
 
                         }
 
+                  }).error(function(data){
+                    document.write(data);
                   });
-
-
-
-
             }
         });
 

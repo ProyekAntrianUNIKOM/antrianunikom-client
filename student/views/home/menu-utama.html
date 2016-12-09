@@ -22,20 +22,20 @@
 
    <!-- Menu -->
     <div id="bg-row" class="flex" ng-show="ambil">
-        <a href="" class="menu-akademik flex" ng-repeat="data in layanan" data="{{data.id_jenispelayanan}}"
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in layanan" data="{{data.id_jenispelayanan}}"
            ng-click="pilihlayanan(data.id_jenispelayanan,data.nama_pelayanan)">
             LAYANAN <br> {{data.nama_pelayanan | uppercase}}
         </a>
     </div>
 
     <div id="bg-row" class="flex" ng-show="pelayanan">
-        <a href="" class="menu-akademik flex" ng-repeat="data in data_pelayanan" data="{{data.id_loket}}"
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in data_pelayanan" data="{{data.id_loket}}"
            ng-click="pilihpelayanan(data.id_pelayanan,data.nama_pelayanan)">{{data.nama_pelayanan | uppercase}}
         </a>
     </div>
 
     <div id="bg-row" class="flex" ng-show="subpelayanan">
-        <a href="" class="menu-akademik flex" ng-repeat="data in data_subpelayanan" data="{{data.id_subpelayanan}}"
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in data_subpelayanan" data="{{data.id_subpelayanan}}"
            ng-click="pilihsubpelayanan(data.id_subpelayanan,data.nama_subpelayanan)">{{data.nama_subpelayanan | uppercase}}
         </a>
     </div>

@@ -1,0 +1,60 @@
+.login #bg-main #bg-row {
+    font-family: 'Montserrat', calibri;
+    width: 60%;
+    flex-direction: column;
+}
+
+.login #bg-main #bg-row #header, .login #bg-main #bg-row #main, .login #bg-main #bg-row #footer {
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.login #bg-main #bg-row #header {
+    height: 30%;
+    background: #fff;
+    font-size: 40px;
+}
+
+.login #bg-main #bg-row #main {
+    height: 50%;
+    background: #fff;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.login #bg-main #bg-row #main table tr {
+    font-size: 20px;
+}
+
+.login #bg-main #bg-row #main table tr input {
+    border-style: none;
+    outline-style: none;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    transition: height 0.3s;
+}
+
+.login #bg-main #bg-row #main table tr td{
+    padding: 15px;
+}
+
+.login #bg-main #bg-row #main #error {
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.login #bg-main #bg-row #footer {
+    height: 20%;
+}
+
+.login #bg-main #bg-row #footer input[type="button"] {
+    height: 100%;
+    width: 100%;
+    background: #2d2e2e;
+    border-style: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}

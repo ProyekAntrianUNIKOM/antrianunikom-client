@@ -43,7 +43,8 @@
 .header .part-1 .label-2,
 .header .part-1 #date,
 .ambil-antrian .nama-loket,
-.ambil-antrian .nama-petugas {
+.ambil-antrian .nama-petugas,
+.ambil-antrian .logout {
     padding: 1.5px;
 }
 
@@ -53,6 +54,10 @@
 
 .header .part-1 #date, .nama-petugas {
     font-family: 'Open Sans', calibri;
+}
+
+.ambil-antrian .logout {
+    cursor: pointer;
 }
 
 .ambil-antrian .main {
@@ -99,12 +104,11 @@
     box-sizing: border-box;
     justify-content: space-around;
     align-items: center;
-    font-family: 'Montserrat', calibri;
 }
 
 .ambil-antrian .panggil-lagi, .ambil-antrian .selanjutnya {
     height: 70%;
-    width: 45%;
+    width: 30%;
     background: #0062a7;
     border-radius: 8px;
     color: #fff;
@@ -179,4 +183,95 @@
 
 .ambil-antrian .info-pengunjung table td:first-child {
     padding-left: 5px;
+}
+
+.modal-container {
+    display: none;
+    position: absolute;
+    z-index: 90;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container .box {
+    z-index: 99;
+    width: 500px;
+    height: 300px;
+    background: #fff;
+    flex-direction: column;
+    -webkit-animation-name: logout;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    animation-name: logout;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+.modal-container .box .main {
+    height: 70%;
+    width: 100%;
+}
+
+.modal-container .box .button {
+    background: #2d2e2e;
+    width: 100%;
+    height: 30%;
+    flex-direction: row;
+}
+
+.modal-container .box .button:first-child {
+    background: red;
+}
+
+.modal-container .box .button .ya {
+    background:
+}
+
+.modal-container .box .main {
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container .box .main p {
+    font-family: 'Montserrat', calibri;
+    font-size: 25px;
+    -webkit-animation-name: logout-text;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    animation-name: logout-text;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+.modal-container .box .button .ya, .modal-container .box .button .tidak {
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: 'Montserrat', calibri;
+}
+
+@keyframes logout {
+    from {width: 0; height: 0;}
+    to {width: 500px; height: 300px;}
+}
+
+@-webkit-keyframes logout {
+    from {width: 0; height: 0;}
+    to {width: 500px; height: 300px;}
+}
+
+@keyframes logout-text {
+    from {font-size: 0;}
+    to {font-size: 25px;}
+}
+
+@-webkit-keyframes logout-text {
+    from {font-size: 0;}
+    to {font-size: 25px;}
 }

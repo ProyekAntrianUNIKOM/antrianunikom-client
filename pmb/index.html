@@ -30,9 +30,13 @@
                         </div>
                     </div>
                     <div class="antrian-active flex">
+						<div class="nama-loket">
+							<span class="kode-1">LOKET</span>
+							<span class="kode-2" id="loket-aktif">1</span>
+						</div>
                         <div class="nomor">
-													<span class="nomor-antrian" id="8">-</span>
-												</div>
+							<span class="nomor-antrian" id="8">-</span>
+						</div>
                     </div>
                 </div>
                 <div class="video flex">
@@ -167,6 +171,7 @@
 										$("#7").html(data.result[6].no_antrian);
 
 										$("#8").html(data.result[7].no_antrian);
+										$("#loket-aktif").html(data.result[7].no_loket);
 
 									}
               });

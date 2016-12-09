@@ -9,6 +9,7 @@ app.value('base_url',base_url);
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {templateUrl: '../partials/login.html',controller:'OperatorController'});
   $routeProvider.when('/', {templateUrl: '../views/operator/home.html'});
+  $routeProvider.when('/mahasiswa',{templateUrl:'../views/operator/mahasiswa.html',});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 

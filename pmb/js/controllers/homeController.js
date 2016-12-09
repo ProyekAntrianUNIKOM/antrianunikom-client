@@ -1,14 +1,34 @@
 'use strict';
 app.controller('OperatorController',function($scope,operatorService,$interval,sessionService,loginService,$http,$cookieStore){
-
+    
     $scope.antriansekarang="";
     sessionService.set("kosong",1);
     $scope.noloket = sessionService.get("loket");
     $scope.nama_operator = sessionService.get("nama");
     $scope.id_peyanan = sessionService.get("id_pelayanan");
     $scope.nama_pelayanan = sessionService.get("nama_pelayanan");
-    $scope.logout = function(){
+     $scope.logoutya = function(){
       loginService.logout();
+    }
+    $scope.logout = function(){
+      //
+        //-- modal --
+        $$('.modal-container')[0].style.display = 'flex';
+        $$('.box')[0].style.display = 'flex';
+        $$('.modal-container')[0].style.backgroundColor = 'rgba(0,0,0,0.7)';
+    }
+    $scope.tidak = function(){
+         $$('.box')[0].style.display = 'none';
+         $$('.modal-container')[0].style.display = 'none';
+         $$('.modal-container')[0].style.backgroundColor = 'rgba(0,0,0,0)';
+    }
+
+    $scope.puas = function(){
+      alert('puas : '+$scope.nomor);
+    }
+
+    $scope.tidak_puas= function(){
+      alert('tidak puas');
     }
     $scope.msgText="";
     $scope.login = function(user){
@@ -38,7 +58,15 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
         }
       }
     }
-
+    $scope.pertanyaan = true; 
+    $scope.selesai=function(){
+      var data ={
+        nomor : $scope.nomor, 
+        loket : $scope.noloket,
+        id_antrian:$cookieStore.get("id_antrian")
+      }
+      socket.emit("selesai",data);
+    }
     $scope.panggilAntrian = function(){
       //definisikan suara
       var sekarang = parseInt($scope.nomor);

@@ -7,7 +7,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form>
-              <h1>Halaman Admin</h1>
+              <h1>Halaman Admin PMB</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" ng-model="admin.username" />
               </div>
@@ -18,14 +18,8 @@
                 <button type="submit" class="btn btn-default submit" ng-disabled="form1.$invalid" ng-click="login(admin)">Log in</button>
               </div>
 
-              <div class="alert alert-danger" role="alert" style="display:none" id="error">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                {{msgTexterror}}
-              </div>
-              <div class="alert alert-success" role="alert" style="display:none" id="success">
-                <span class="glyphicon glyphicon glyphicon-{{status}}" aria-hidden="true"></span>
-                {{msgTextsuccess}}
-              </div>
+              <div class="alert alert-danger" role="alert" style="display:none" id="error">{{msgTexterror}}</div>
+              <div class="alert alert-success" role="alert" style="display:none" id="success">{{msgTextsuccess}}</div>
 
               <div class="separator">
 

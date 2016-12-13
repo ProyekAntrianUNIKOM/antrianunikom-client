@@ -10,7 +10,7 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
   $scope.bulanvLoketD = '-';
   var no_loket = [];
   var jumlahLoketD = [];
-  $http.get(base_url+'history/loket')
+  $http.post(base_url+'history/loket')
     .success(function (data, status, headers, config) {
       for (var i=0; i<data.result.length; i++) {
         no_loket.push('Loket - '+data.result[i].no_loket);
@@ -25,6 +25,42 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
   $scope.colorsLoketD = [{backgroundColor:[ '#f7464a', '#00ADF9','#97bbcd', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']}];
 
   $scope.dataLoketD = [jumlahLoketD];
+
+  $scope.SendDataLoketD = function () {
+    $scope.tahunvLoketD = $scope.tahunLoketD;
+    $scope.bulanvLoketD = $scope.bulanLoketD;
+    var data = $.param({
+      tahun: $scope.tahunvLoketD,
+      bulan: $scope.bulanvLoketD
+    });
+
+    var config = {
+      headers : {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      }
+    }
+    var no_loket = [];
+    var jumlahLoketD = [];
+    $http.post(base_url+'history/loket', data, config)
+      .success(function (data, status, headers, config) {
+        for (var i=0; i<data.result.length; i++) {
+          no_loket.push(data.result[i].no_loket);
+        }
+        for (var i=0; i<data.result.length; i++) {
+          jumlahLoketD.push(data.result[i].jumlah);
+        }
+        if(data.result.length==0){
+          $scope.msgLoketD = 'Data not found.';
+        }else{
+          $scope.msgLoketD = '';
+        }
+      }).error(function (data, status, header, config) {
+        console.log(data);
+    });
+    $scope.labelsLoketD = no_loket;
+    $scope.colorsLoketD = [{backgroundColor:[ '#f7464a', '#00ADF9','#97bbcd', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']}];
+    $scope.dataLoketD = [jumlahLoketD];
+  }
 
   //History Operator
   $scope.tahunv = '-';
@@ -85,7 +121,7 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
     $scope.data = [jumlah];
   }
 
-  //History Loket
+  //History Pelayanan
   $scope.tahunvLoket = '-';
   $scope.bulanvLoket = '-';
   var nama_pelayanan = [];

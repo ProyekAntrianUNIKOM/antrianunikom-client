@@ -14,14 +14,17 @@
 	<script src="lib/angular/angular-route.js"></script>
 	<script src="lib/angular/angular-cookies.js"></script>
 	<script src="js/app/antrian.js"></script>
+	<script src="js/socket.io.min.js"></script>
 	<script>
 			angular.module('standByApp',['ngCookies'])
-			.controller('standByController',function($scope,$http,$cookieStore,$location){
-					$scope.ambilantrian=function(){
-							$http({
-											method : "GET",
-											url : base_url+"ambilantrianpmb"
-							}).success(function(data,status){
+			// .controller('standByController',function($scope,$http,$cookieStore,$location){
+			// 		$scope.ambilantrian=function(){
+			// 				$http({
+			// 								method : "GET",
+			// 								url : base_url+"ambilantrianpmb"
+			// 				}).success(function(data,status){
+								var socket=io();
+								socket.on("dataArduino",function(data){
 									if(data.status==200){
 										swal({
 													title: "NOMOR ANTRIAN ANDA " +data.result,
@@ -39,17 +42,18 @@
 													timer:2000
 											});
 									}
-							}).error(function (data,status) {
-									console.log('error : '+status);
-							});
-							};
-			});
+								});
+			// 				}).error(function (data,status) {
+			// 						console.log('error : '+status);
+			// 				});
+			// 		};
+			// });
 	</script>
 </head>
 <body onload="times()" ng-controller="standByController">
 	<!---- Modal ---->
 
-	
+
 	<div id="background"></div>
 	<div id="bg" class="standby">
 

@@ -1,9 +1,35 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-input','summernote','ngAnimate']).controller("chartcont", function ($scope,$http) {
+var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-input','angularMoment','summernote','ngAnimate']).controller("chartcont", function ($scope,$http,moment) {
   var host = "http://"+window.location.host;
   var base_url  = host+"/apiantrian/public/api/v1/";
+
+  //History Loket Waktu Melayani
+  $scope.tahunvTerlayani = '-';
+  $scope.bulanvTerlayani = '-';
+  var operatorMelayani = [];
+  var rata_melayani = [];
+  $http.get(base_url+'history/operator/waktu_melayani')
+    .success(function (data, status, headers, config) {
+      for (var i=0; i<data.result.length; i++) {
+        operatorMelayani.push(data.result[i].nama);
+      }
+      for (var i=0; i<data.result.length; i++) {
+        var a = data.result[i].rata_waktu_melayani;
+        var re = a.replace(/:/g,".");
+        var b = moment.duration(a, "HH:mm:ss").asMinutes();
+        rata_melayani.push(Math.round(b));
+      }
+    }).error(function (data, status, header, config) {
+      console.log(data);
+  });
+  console.log(rata_melayani);
+  $scope.labelsTerlayani = operatorMelayani;
+  $scope.colorsTerlayani = [{backgroundColor:[ '#36a2eb', '#ff6384','#4bc0c0', '#ffce56', '#e7e9ed', '#71b37c', '#949FB1', '#4D5360']}];
+
+  $scope.dataTerlayani = [rata_melayani];
+  $scope.seriesTerlayani = ['In Minute'];
 
   //History Loket
   $scope.tahunvLoketD = '-';

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="standByApp">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Antrian UNIKOM</title>
@@ -15,33 +15,26 @@
 	<script src="lib/angular/angular-cookies.js"></script>
 	<script src="js/app/antrian.js"></script>
 	<script src="js/socket.io.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.1/socket.io.min.js"></script>
 	<script>
-			angular.module('standByApp',['ngCookies'])
+			//angular.module('standByApp',['ngCookies'])
 			// .controller('standByController',function($scope,$http,$cookieStore,$location){
 			// 		$scope.ambilantrian=function(){
 			// 				$http({
 			// 								method : "GET",
 			// 								url : base_url+"ambilantrianpmb"
 			// 				}).success(function(data,status){
-								var socket=io();
+								var socket=io('http://localhost:3000');
 								socket.on("dataArduino",function(data){
-									if(data.status==200){
+									var a = data.value.split('#');
 										swal({
-													title: "NOMOR ANTRIAN ANDA " +data.result,
+													title: "NOMOR ANTRIAN ANDA " +a[1],
 													text : "Harap ingat nomor antrian anda",
 													type: "success",
 													confirmButtonText: "OKE",
 													timer:5000
 											});
-									}else{
-											swal({
-													title: "Uppss",
-													text: "TERJADI KESALAHAN DALAM MENGAMBIL ANTRIAN",
-													type: "error",
-													confirmButtonText: "OKE",
-													timer:2000
-											});
-									}
+
 								});
 			// 				}).error(function (data,status) {
 			// 						console.log('error : '+status);
@@ -50,9 +43,7 @@
 			// });
 	</script>
 </head>
-<body onload="times()" ng-controller="standByController">
-	<!---- Modal ---->
-
+<body onload="times()">
 
 	<div id="background"></div>
 	<div id="bg" class="standby">

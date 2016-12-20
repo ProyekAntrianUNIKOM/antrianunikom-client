@@ -14,7 +14,14 @@
     <script src="lib/angular/angular-route.js"></script>
     <script src="lib/angular/angular-cookies.js"></script>
     <script src="js/app/antrian.js"></script>
+    <style>
+        div#form {
+            position: fixed;
+            bottom: 0;
+            margin-top: 300px;
+        }
 
+    </style>
     <script>
         angular.module('standByApp',['ngCookies'])
         .controller('standByController',function($scope,$http,$cookieStore,$location){

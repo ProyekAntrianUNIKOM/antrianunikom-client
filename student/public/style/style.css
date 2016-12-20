@@ -124,6 +124,29 @@ html, body {
     flex-wrap: wrap;
 }
 
+#bg-main #bg-row2{
+    margin-top: -50px;
+    width: 80%;
+    height: 55%;
+    margin-bottom: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#bg-main #bg-row2 a {
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+    text-decoration: none;
+    color: #017dbe;
+    font-family: 'Montserrat', calibri;
+    font-weight: bold;
+    text-wrap: wrap;
+}
+
 #bg-main #bg-row a {
     justify-content: center;
     align-items: center;
@@ -138,6 +161,10 @@ html, body {
 }
 
 #bg-main #bg-row a span {
+    width: 75%;
+}
+
+#bg-main #bg-row2 a span {
     width: 75%;
 }
 

@@ -31,6 +31,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
         $cookieStore.put('id_antrian',data[0].id_antrian);
     });
 
+    //fungsi putar suara
     function playsound(i,j,nomor){
       if(i<nomor.length) {
         var sound = new Audio('../public/sound/'+nomor[i]+'.wav');
@@ -46,25 +47,23 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
       }
     }
 
-     $scope.panggilAntrian = function(){
-      //definisikan suara
-      var sekarang = parseInt($scope.nomor);
-      if(sekarang>0){
+    //fungsi generate suara
+    function generate_suara(nomor){
         var suara = new Array();
         suara.push("nomor-urut");
 
-        var ratus = Math.floor(sekarang / 100);
-        var sisa  = sekarang % 100;
+        var ratus = Math.floor(nomor / 100);
+        var sisa  = nomor % 100;
         var puluh = Math.floor(sisa / 10);
         var satuan = sisa % 10;
-        console.log(sekarang);
-        console.log(ratus);
-        console.log(sisa);
-        console.log(puluh);
-        console.log(satuan);
+        // console.log(nomor);
+        // console.log(ratus);
+        // console.log(sisa);
+        // console.log(puluh);
+        // console.log(satuan);
 
-        if(sekarang<10) {
-          suara.push(sekarang);
+        if(nomor<10) {
+          suara.push(nomor);
         } else {
         //  console.log('masuk kesini');
           //cek ratusan
@@ -76,7 +75,7 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
             suara.push(ratus);
             suara.push('ratus');
           }
-        }
+         }
 
             if(sisa>0) {
               if(sisa < 20){
@@ -84,9 +83,11 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                   suara.push("sepuluh");
                 }else if(sisa==11) {
                   suara.push("sebelas");
-                } else {
+                } else if(sisa>10){
                   suara.push(satuan);
                   suara.push("belas");
+                }else{
+                  suara.push(satuan);
                 }
               } else {
                 suara.push(puluh);
@@ -99,6 +100,15 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
         }
         suara.push("loket");
         suara.push(sessionService.get('loket'));
+        return suara;
+    }
+
+    //fungsi panggil lagi
+     $scope.panggilAntrian = function(){
+      //definisikan suara
+      var sekarang = parseInt($scope.nomor);
+      if(sekarang>0){
+        var suara = generate_suara(sekarang);
         playsound(0,2,suara);
       } else {
         alert('Silahkan panggil antrian terlebih dahulu!!');
@@ -113,27 +123,42 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
       $scope.jumAntrian = jum;
     });
     }
-     $interval(getjumantrian, 1000);
+    $interval(getjumantrian, 1000);
+    //disable button 
+     $scope.btnSelanjutnya = false; 
+     $scope.btnPanggil = true; 
+     $scope.btnSelesai = true; 
 
-    
+     //Antrian Selesai 
+     $scope.selesai = function(){
+       if($cookieStore.get("id_antrian")>0){
+          var kirim ={
+                id_antrian :$cookieStore.get("id_antrian")
+          }
+
+          $http.post(base_url+"antrian/terlayani",kirim).success(function(data,status){
+                    alert('Waktu antrian sudah tercatat');
+                    $scope.btnSelesai=true; 
+                    $scope.btnSelanjutnya=false;
+                    $scope.btnPanggil=false;  
+          }).error(function(data){
+              document.write(data);
+          });
+        }
+     }
+
+     //Panggil Antrian Selanjutnya 
      $scope.selanjutnya = function(){
         console.log('Testing : '+$cookieStore.get("id_antrian"));
         $http.get(base_url+"getantrian/"+sessionService.get("id_pelayanan")).success(function (data,status) {
             if(data.status==400){
                 alert('ANTRIAN KOSONG');
             }else{
+                $scope.btnSelanjutnya = true; 
+                $scope.btnSelesai=false; 
+                $scope.btnPanggil=false;
                 console.log(data);
-                if($cookieStore.get("id_antrian")>0){
-                  var kirim ={
-                    id_antrian :$cookieStore.get("id_antrian")
-                  }
-
-                  $http.post(base_url+"antrian/terlayani",kirim).success(function(data,status){
-                    //alert('Berhasil update waktu terlayani');
-                  }).error(function(data){
-                    document.write(data);
-                  });
-                }
+                
 
                 var datakirim = {
                   id_antrian : data.result[0].id_antrian,
@@ -157,64 +182,12 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
                             $scope.antriansekarangJenispelayanan = data.nama_pelayanan;
                             $scope.noarray=$scope.nomor.split("");
                             var sekarang = parseInt(data.result);
-                            var suara = new Array();
-                            suara.push("nomor-urut");
-
-                            var ratus = Math.floor(sekarang / 100);
-                            var sisa  = sekarang % 100;
-                            var puluh = Math.floor(sisa / 10);
-                            var satuan = sisa % 10;
-                            console.log(sekarang);
-                            console.log(ratus);
-                            console.log(sisa);
-                            console.log(puluh);
-                            console.log(satuan);
-
-                            if(sekarang<10) {
-                              suara.push(sekarang);
-                            } else {
-                            //  console.log('masuk kesini');
-                              //cek ratusan
-                              if(ratus>0){
-                                if(ratus==1){
-                                  suara.push('seratus');
-
-                                } else {
-                                suara.push(ratus);
-                                suara.push('ratus');
-                              }
-                            }
-
-                                if(sisa>0) {
-                                  if(sisa < 20){
-                                    if(sisa==10){
-                                      suara.push("sepuluh");
-                                    }else if(sisa==11) {
-                                      suara.push("sebelas");
-                                    } else {
-                                      suara.push(satuan);
-                                      suara.push("belas");
-                                    }
-                                  } else {
-                                    suara.push(puluh);
-                                    suara.push("puluh");
-                                    if(satuan>0) {
-                                      suara.push(satuan);
-                                    }
-                                  }
-                                }
-                            }
-                            suara.push("loket");
-                            suara.push(sessionService.get('loket'));
+                            var suara = generate_suara(sekarang);
                             playsound(0,2,suara);
 
                         }
 
                   });
-
-
-
-
             }
         });
 

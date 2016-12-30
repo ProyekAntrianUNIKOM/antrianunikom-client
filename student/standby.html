@@ -22,24 +22,33 @@
         }
 
     </style>
+    <script src="public/js/socket.io-1.4.5.js"></script>
+    <script>
+        var socket = io('http://127.0.0.1:3000');
+        
+    </script>
     <script>
         angular.module('standByApp',['ngCookies'])
         .controller('standByController',function($scope,$http,$cookieStore,$location){
-            $scope.ambilAntrian=function(){
+            socket.on('kirim rfid', function (data) {
+                    $scope.ambilAntrian(data);
+                    console.log(data);
+            });
+            $scope.ambilAntrian=function(nomor){
                 $http({
                         method : "POST",
                         url : base_url+"validasimhs",
                         data:{
-                        'no_rfid': $scope.no_rfid
+                        'no_rfid': nomor
                         }
                 }).success(function(data,status){
                   var d = new Date();
                   var h = checkTime(d.getHours());
                   var m = checkTime(d.getMinutes());
                     if(data.status==200){
-                        if(h+""+m >= 1530) {
+                        if(h+""+m >= 1900) {
                           swal({
-                              title: "Uppss",
+                              title: "KESALAHAN",
                               text: "MOHON MAAF SUDAH MELEBIHI BATAS JAM KERJA",
                               type: "error",
                               confirmButtonText: "OKE",
@@ -54,7 +63,49 @@
                     }else{
                         $scope.no_rfid = "";
                         swal({
-                            title: "Uppss",
+                            title: "KESALAHAN",
+                            text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
+                            type: "error",
+                            confirmButtonText: "OKE",
+                            timer:2000
+                        });
+                    }
+                }).error(function (data,status) {
+                    console.log('error : '+status);
+                });
+                };
+
+                //Ambil antrian dari RFID yang lama
+                $scope.ambilAntrian2=function(){
+                $http({
+                        method : "POST",
+                        url : base_url+"validasimhs",
+                        data:{
+                        'no_rfid': $scope.no_rfid
+                        }
+                }).success(function(data,status){
+                  var d = new Date();
+                  var h = checkTime(d.getHours());
+                  var m = checkTime(d.getMinutes());
+                    if(data.status==200){
+                        if(h+""+m >= 1900) {
+                          swal({
+                              title: "KESALAHAN",
+                              text: "MOHON MAAF SUDAH MELEBIHI BATAS JAM KERJA",
+                              type: "error",
+                              confirmButtonText: "OKE",
+                              timer:2000
+                          });
+                        }else {
+                          $cookieStore.put('norfid',data.result[0].no_rfid);
+                          //console.log($cookieStore.get('norfid'));
+                          //$location.path('/step2');
+                          document.location.href="home/#/step2";
+                        }
+                    }else{
+                        $scope.no_rfid = "";
+                        swal({
+                            title: "KESALAHAN",
                             text: "MOHON MAAF ANDA TIDAK TERDAFTAR SEBAGAI MAHASISWA UNIKOM",
                             type: "error",
                             confirmButtonText: "OKE",
@@ -74,8 +125,9 @@
   		}
 
   	</script>
+      
 </head>
-<body onload="times()" ng-controller="standByController">
+<body onload="times()" ng-controller="standByController" id="body">
 	<div id="background"></div>
 	<div id="bg" class="standby">
 
@@ -103,7 +155,7 @@
             <img src="public/img/frameset2.png" alt="">
         </div>
 			<div id="form">
-             <form ng-submit="ambilAntrian()">
+             <form ng-submit="ambilAntrian2()">
                 <input type="password" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" onfocusout="ubahfocus()" autofocus style="position:fixed;bottom:-1000">
             </form>
         </div>
@@ -115,7 +167,7 @@
 
     <div id="cont-ktm" class="flex">
         <div id="ktm" class="flex">
-            <p>TAP YOUR KTM HERE</p>
+            <p>TAP YOUR KTM FIRST</p>
             <a href="">
                 <img src="public/img/ic_back.png" alt="back">
             </a>

@@ -35,8 +35,9 @@
 						<div class="text flex">Antrian No. : </div>
 						<div class="no flex">{{nomor}}</div>
 						<div class="button flex">
-								<div class="panggil-lagi flex" ng-click="panggilAntrian()">PANGGIL LAGI</div>
-								<div class="selanjutnya flex" ng-click="selanjutnya()">SELANJUTNYA</div>
+								<div class="panggil-lagi flex" ng-click="panggilAntrian()" ng-disabled="btnPanggil">PANGGIL LAGI</div>
+								<button class="selanjutnya flex" ng-click="selesai()" ng-disabled="btnSelesai">SELESAI</button>
+								<button class="selanjutnya flex" ng-disabled="btnSelanjutnya" ng-click="selanjutnya()">SELANJUTNYA</button>
 						</div>
 				</div>
 

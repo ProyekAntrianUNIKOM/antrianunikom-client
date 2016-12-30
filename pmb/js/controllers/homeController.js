@@ -59,14 +59,37 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
       }
     }
     $scope.pertanyaan = true; 
+    // $scope.selesai=function(){
+    //   var data ={
+    //     nomor : $scope.nomor, 
+    //     loket : $scope.noloket,
+    //     id_antrian:$cookieStore.get("id_antrian")
+    //   }
+    //   socket.emit("selesai",data);
+    // }
+
+    //button disabled 
+
+    $scope.btnSelanjutnya = false; 
+    $scope.btnPanggil = true; 
+    $scope.btnSelesai = true; 
+    
     $scope.selesai=function(){
-      var data ={
-        nomor : $scope.nomor, 
-        loket : $scope.noloket,
-        id_antrian:$cookieStore.get("id_antrian")
-      }
-      socket.emit("selesai",data);
+        if($cookieStore.get("id_antrian")>0){
+                  var kirim ={
+                    id_antrian :$cookieStore.get("id_antrian")
+                  }
+                  //update waktu terlayani
+                  $http.post(base_url+"antrianpmb/terlayani",kirim).success(function(data,status){
+                    alert('Lama waktu pelayanan berhasil di simpan');
+                  }).error(function(data){
+                    document.write(data);
+                  });
+                }
+       $scope.btnSelanjutnya=false; 
+       $scope.btnSelesai=true; 
     }
+
     $scope.panggilAntrian = function(){
       //definisikan suara
       var sekarang = parseInt($scope.nomor);
@@ -142,17 +165,9 @@ app.controller('OperatorController',function($scope,operatorService,$interval,se
             if(data.result.length==0){
                 alert('ANTRIAN KOSONG');
             }else{
-                if($cookieStore.get("id_antrian")>0){
-                  var kirim ={
-                    id_antrian :$cookieStore.get("id_antrian")
-                  }
-                  //update waktu terlayani
-                  $http.post(base_url+"antrianpmb/terlayani",kirim).success(function(data,status){
-                    //alert('Berhasil update waktu terlayani');
-                  }).error(function(data){
-                    document.write(data);
-                  });
-                }
+                 $scope.btnSelanjutnya=true; 
+                 $scope.btnSelesai=false;
+                 $scope.btnPanggil=false; 
 
                 var datakirim = {
                   id_antrian : data.result[0].id_antrian,

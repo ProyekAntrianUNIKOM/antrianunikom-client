@@ -5,6 +5,75 @@ var app = angular.module('adminApp', ['ngRoute','ngCookies','chart.js','ng-file-
   var host = "http://"+window.location.host;
   var base_url  = host+"/apiantrian/public/api/v1/";
 
+  //History Loket Waktu Melayani
+  $scope.tahunvTerlayani = '-';
+  $scope.bulanvTerlayani = '-';
+  $scope.tanggalvTerlayani = '-';
+  var operatorMelayani = [];
+  var rata_melayani = [];
+  $http.post(base_url+'pmb/history/operator/waktu_melayani')
+    .success(function (data, status, headers, config) {
+      for (var i=0; i<data.result.length; i++) {
+        operatorMelayani.push(data.result[i].nama);
+      }
+      for (var i=0; i<data.result.length; i++) {
+        var a = data.result[i].rata_waktu_melayani;
+        var re = a.replace(/:/g,".");
+        var b = moment.duration(a, "HH:mm:ss").asMinutes();
+        rata_melayani.push(Math.round(b));
+      }
+    }).error(function (data, status, header, config) {
+      console.log(data);
+  });
+  $scope.labelsTerlayani = operatorMelayani;
+  $scope.colorsTerlayani = [{backgroundColor:[ '#36a2eb', '#ff6384','#4bc0c0', '#ffce56', '#e7e9ed', '#71b37c', '#949FB1', '#4D5360']}];
+
+  $scope.dataTerlayani = [rata_melayani];
+  $scope.seriesTerlayani = ['In Minute'];
+
+  $scope.SendDataTerlayani = function () {
+    $scope.tahunvTerlayani = $scope.tahunTerlayani;
+    $scope.bulanvTerlayani = $scope.bulanTerlayani;
+    $scope.tanggalvTerlayani = $scope.tanggalTerlayani;
+    var data = $.param({
+      tahun: $scope.tahunvTerlayani,
+      bulan: $scope.bulanvTerlayani,
+      hari: $scope.tanggalvTerlayani,
+    });
+
+    var config = {
+      headers : {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      }
+    }
+    var operatorMelayani = [];
+    var rata_melayani = [];
+    $http.post(base_url+'pmb/history/operator/waktu_melayani', data, config)
+      .success(function (data, status, headers, config) {
+        for (var i=0; i<data.result.length; i++) {
+          operatorMelayani.push(data.result[i].nama);
+        }
+        for (var i=0; i<data.result.length; i++) {
+          var a = data.result[i].rata_waktu_melayani;
+          var re = a.replace(/:/g,".");
+          var b = moment.duration(a, "HH:mm:ss").asMinutes();
+          rata_melayani.push(Math.round(b));
+        }
+        if(data.result.length==0){
+          $scope.msgTerlayani = 'Data not found.';
+        }else{
+          $scope.msgTerlayani = '';
+        }
+      }).error(function (data, status, header, config) {
+        console.log(data);
+    });
+    $scope.labelsTerlayani = operatorMelayani;
+    $scope.colorsTerlayani = [{backgroundColor:[ '#36a2eb', '#ff6384','#4bc0c0', '#ffce56', '#e7e9ed', '#71b37c', '#949FB1', '#4D5360']}];
+
+    $scope.dataTerlayani = [rata_melayani];
+    $scope.seriesTerlayani = ['In Minute'];
+  }
+
   //History Loket
   $scope.tahunvLoketD = '-';
   $scope.bulanvLoketD = '-';

@@ -11,6 +11,7 @@
             <div class="panel-heading"><h4> Loket History <small> Rata-rata Waktu Melayani </small> </h4></div><p>
             <p align="center">Tahun : {{tahunvTerlayani}}</p>
             <p align="center">Bulan : {{bulanvTerlayani}}</p>
+            <p align="center">Tanggal : {{tanggalvTerlayani}}</p>
             <div class="panel-body">
               <div class="title_right">
                 <div class="form-group top_search">
@@ -20,6 +21,10 @@
 
                     </span>
                     <input type="text" ng-model="bulanTerlayani" class="form-control" placeholder="Bulan , ex. 06">
+                    <span class="input-group-btn">
+
+                    </span>
+                    <input type="text" ng-model="tanggalTerlayani" class="form-control" placeholder="Tanggal , ex. 20">
                     <span class="input-group-btn">
                         <button ng-click="SendDataTerlayani()" class="btn btn-default" type="button">Search</button>
                     </span>

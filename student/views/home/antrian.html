@@ -1,0 +1,44 @@
+<div id="modal-container" class="flex">
+    <div id="modal">
+
+        <div id="modal-header" class="flex">
+            <p>LOKET {{noloket}}</p>
+        </div>
+
+        <div id="modal-main" class="flex">
+            <label>No. Antrian :</label>
+            <div id="no-antrian">{{noantrian}}</div>
+        </div>
+
+        <div id="modal-footer" class="flex">
+            <a href="#step2" id="exit" class="flex" onclick="tutup()">
+                KEMBALI
+            </a>
+            <a href="#" id="ambil" class="flex" ng-click="simpanantrian()">
+                AMBIL ANTRIAN
+            </a>
+        </div>
+    </div>
+</div>
+
+<center>
+    <div class="panel col-md-12" style="width: 100%;display:none">
+        <div class="panel-heading">
+            <h1>Selamat Datang</h1>
+            <h4>Silahkan scan kartu mahasiswa anda</h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12"></div>
+            <div class="row col-md-12">
+                <form ng-submit="ambilAntrian()">
+                    <div class="form-group vertical-center-row">
+                        <input type="text" name="rfid" id="rfid" ng-model="no_rfid" class="form-control" autofocus>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <button class="btn btn-primary" ng-click="ambilAntrian()" id="cek">Lanjutkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>

@@ -1,0 +1,192 @@
+.menus {
+    height: 50%;
+    width: 30%;
+    font-size: 200%;
+    margin: 1%;
+    border-radius: 4%;
+    box-shadow: 0 0 40px black;
+	box-sizing: border-box;
+}
+
+#modal-container {
+    z-index: 90;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0);
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal {
+    font-family: 'Montserrat', calibri;
+    display: none;
+    flex-direction: column;
+    height: 500px;
+    width: 800px;
+	position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+    -webkit-animation-name: muncul;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    animation-name: muncul;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+#modal-header {
+    font-size: 40px;
+    color: #2d2e2e;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+#modal-header p {
+    padding-top: 50px;
+}
+
+#modal-main {
+    color: #2d2e2e;
+    position: relative;
+    height: 60%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    font-size: 25px;
+}
+
+#modal-main label {
+    font-size: 27px;
+    animation-name: muncul-text3;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -webkit-animation-name: muncul-text3;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul-text3;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+#modal-main #no-antrian {
+    font-size: 120px;
+    -webkit-animation-name: muncul-text;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul-text;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    animation-name: muncul-text;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+#modal-container .error #modal-header {
+    color: red;
+    height: 40%;
+    font-size: 40px;
+    -webkit-animation-name: muncul-text2;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    -moz-animation-name: muncul-text2;
+    -moz-animation-duration: 0.3s;
+    -moz-animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+    animation-name: muncul-text2;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(.35, -0.01, .57, 2);
+}
+
+#modal-footer {
+    flex-direction: row;
+    position: relative;
+    height: 20%;
+    background: #2d2e2e;
+    color: #ffffff;
+}
+
+#modal-footer #exit {
+    border-right: 2px solid rgba(255,255,255,.2);
+}
+
+#modal-footer #exit, #modal-footer #ambil , #modal-footer #daftar{
+    cursor: pointer;
+    color: #ffffff;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+@keyframes muncul-text {
+    from {font-size: 0;}
+    to   {font-size: 120px;}
+}
+
+@-webkit-keyframes muncul-text {
+    from {font-size: 0;}
+    to   {font-size: 120px;}
+}
+
+@-moz-keyframes muncul-text {
+    from {font-size: 0;}
+    to   {font-size: 120px;}
+}
+
+@keyframes muncul-text2 {
+    from {font-size: 0;}
+    to   {font-size: 40px;}
+}
+
+@-webkit-keyframes muncul-text2 {
+    from {font-size: 0;}
+    to   {font-size: 40px;}
+}
+
+@-moz-keyframes muncul-text2 {
+    from {font-size: 0;}
+    to   {font-size: 40px;}
+}
+
+@keyframes muncul-text3 {
+    from {font-size: 0;}
+    to   {font-size: 27px;}
+}
+
+@-webkit-keyframes muncul-text3 {
+    from {font-size: 0;}
+    to   {font-size: 27px;}
+}
+
+@-moz-keyframes muncul-text3 {
+    from {font-size: 0;}
+    to   {font-size: 27px;}
+}
+
+@keyframes muncul {
+    from {width: 50px; height: 30px;}
+    to   {width: 800px; height: 500px;}
+}
+
+@-webkit-keyframes muncul {
+    from {width: 50px; height: 30px;}
+    to   {width: 800px; height: 500px;}
+}
+
+@-moz-keyframes muncul {
+    from {width: 50px; height: 30px;}
+    to   {width: 800px; height: 500px;}
+}

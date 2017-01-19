@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ANTRIAN UNIKOM</title>
+    <link rel="stylesheet" href="../public/style/style.css">
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/app/helper.js"></script>
+
+    <script src="../js/sweetalert.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../lib/angular/angular-cookies.js"></script>
+    <script src="../js/app/antrian.js"></script>
+
+    <script src="../js/controllers/AntrianController.js"></script>
+
+
+</head>
+<body onload="times()">
+<div id="background"></div>
+<div id="bg">
+
+  <!-- Modal -->
+
+
+    <div id="bg-header" class="flex" ng-include="'../views/home/template/head.html'"></div>
+
+    <div id="bg-main" class="flex" ng-view></div>
+
+    <!-- Footer -->
+    <div id="footer" class="flex" >
+      <div id="footer-time"></div>
+      		<marquee behavior="" direction="">
+      			BIRO ADMINISTRASI AKADEMIK DAN KEMAHASISWAAN UNIKOM
+      		</marquee>
+    </div>
+</div>
+
+<!--<script src="../controller/controller.js"></script>-->
+<script type="text/javascript">
+  function tutup(){
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('modal-container').style.display = 'none';
+    document.getElementById('modal-container').style.backgroundColor = 'rgba(0,0,0,0)';
+  }
+
+</script>
+<script src="../public/script/client.js"></script>
+</body>
+</html>

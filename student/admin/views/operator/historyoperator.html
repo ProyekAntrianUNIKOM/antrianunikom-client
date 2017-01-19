@@ -1,0 +1,79 @@
+<div ng-include="'views/partials/nav.htm'"></div>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3> Operator History <small> detail history operator</small> </h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-10 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" ng-model="tahun" class="form-control" placeholder="Tahun , ex. 2016">
+            <span class="input-group-btn">
+
+            </span>
+            <input type="text" ng-model="bulan" class="form-control" placeholder="Bulan , ex. 06">
+            <span class="input-group-btn">
+                <button ng-click="search(tahun,bulan)" class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Operator {{nama_operator}} History <small> detail pelayanan operator {{nama_operator}}</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div class="row">
+              {{msg}}
+              <div class="col-md-55" ng-repeat="data in datahistory">
+                <div class="thumbnail">
+
+                    <div class="caption">
+                      <p><strong>NIM :</strong></p>
+                      <p> {{data.nim}}</p>
+                      <p><strong>Nama mahasiswa :</strong></p>
+                      <p>{{data.nama_mahasiswa}}</p>
+
+                    </div>
+
+                  <div class="caption">
+                    <p><strong>Tanggal Pelayanan</strong></p>
+                    <p>{{data.tanggal_pelayanan}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/custom.min.js"></script>

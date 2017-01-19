@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="operatorApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Operator</title>
+    <link rel="stylesheet" href="../public/style/style.css">
+</head>
+<body onload="tanggal()" ng-controller="OperatorController">
+    <!---- Modal ---->
+      <div class="modal-container" id="modal-selesai">
+        <div class="box">
+            <div class="main flex">
+                <p>Apakah anda puas dengan pelayanan kami ? </p>
+            </div>
+            <div class="button flex">
+                <div class="ya flex" ng-click="puas()">YA</div>
+                <div class="tidak flex" ng-click="tidak_puas()">TIDAK</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+	var socket = io.connect('http://localhost:8080'); 
+	socket.on('pesan baru',function(data){
+		alert(data);
+    });
+
+</script>
+
+
+<div class="ambil-antrian">
+		<div class="header flex">
+				<div class="part-1 flex">
+						<div class="logo" style="height: 75%; width: 110px; margin: 2%;">
+								<img src="../public/img/logo.png" height="100%" alt="logo">
+						</div>
+						<div class="text">
+								<div class="label-1" >Biro Administrasi Umum</div>
+								<div class="label-2">Universitas Komputer Indonesia</div>
+
+						</div>
+				</div>
+		</div>
+
+		<div class="main flex">
+				<div class="no-antrian">
+						<div class="text flex" style="text-align:center">NOMOR ANTRIAN  : </div>
+						<div class="no flex">{{nomor}}</div>
+				</div>
+
+				<div class="ket-antrian flex">
+						<div class="jumlah-antrian flex">
+								<p>Jumlah Antrian : </p>
+								<span id="jumlah-antrian">{{jumAntrian}}</span>
+						</div>
+
+						<div class="info-pengunjung flex">
+								<table>
+										<tr>
+												<td colspan="3">Informasi Pelayanan</td>
+										</tr>
+										<tr>
+												<td>Jenis Pelayanan</td>
+												<td>:</td>
+												<td id="prodi">Pelayanan PMB</td>
+										</tr>
+										<tr>
+												<td>Loket</td>
+												<td>:</td>
+												<td id="nim">{{noloket}}</td>
+										</tr>
+										<tr>
+												<td>Operator</td>
+												<td>:</td>
+												<td id="nama">{{nama_operator}}</td>
+										</tr>
+								</table>
+						</div>
+				</div>
+		</div>
+</div>
+
+    <script type="text/javascript" src="../public/script/client.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/loginController.js"></script>
+    <script src="../js/controllers/homeController.js"></script>
+    <script src="../js/directives/loginDirective.js"></script>
+    <script src="../js/services/loginService.js"></script>
+    <script src="../js/services/sessionService.js"></script>
+    <script src="../js/services/operatorService.js"></script>
+    <script src="../lib/angular/angular-cookies.js"></script>
+    <script src="../lib/socket.io-1.4.5.js"></script>
+    <script>
+        var socket = io("http://localhost:8080/");
+		
+        socket.on("selesai",function(data){
+            alert('Nomor antrian : '+data.id_antrian);
+		    document.getElementById("modal-selesai").style.display = 'flex';
+            $$('.box')[0].style.display = 'flex';
+           document.getElementById("modal-selesai").style.backgroundColor = 'rgba(0,0,0,0.7)';
+	    });
+    </script>
+</body>
+</html>

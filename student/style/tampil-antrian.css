@@ -1,0 +1,145 @@
+.bg-antrian #main {
+    background-color: #003d5a;
+    flex-direction: column;
+    justify-content: space-around;;
+    align-items: stretch;
+    height: 100%;
+    font-family: 'Open Sans', calibri;
+}
+
+.bg-antrian #main .active {
+    height: 50%;
+    margin-left: 0.5%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+}
+
+.bg-antrian #main .active div, .bg-antrian #main .queue div {
+    margin-right: 0.5%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.bg-antrian #main .process, .bg-antrian #main .video {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #0067b0;
+    border-radius: 5px;
+}
+
+.bg-antrian #main .process {
+    width: 50%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bg-antrian #main .process .header {
+    height: 32%;
+    border-radius: 0;
+    border-bottom: 1px solid #fafafa;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    margin: 1%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.bg-antrian #main .process .header .text {
+    width: 50%;
+    color: #fff;
+}
+
+.bg-antrian #main .process .header .text .label-1,
+.bg-antrian #main .process .header .text .label-2
+{
+    font-size: 20px;
+    padding: 2px;
+    font-family: 'Montserrat';
+}
+
+.bg-antrian #main .process .antrian-active {
+    height: 68%;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+.bg-antrian #main .process .antrian-active .nomor {
+    margin-top: -6%;
+    font-size: 130px;
+    color: #fcff00;
+    padding: 0;
+    font-weight: bold;
+}
+
+.bg-antrian #main .process .antrian-active .id {
+    font-size: 30px;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.bg-antrian #main .video {
+    justify-content: center;;
+    align-items: center;
+    width: 50%;
+    overflow: hidden;
+}
+
+.bg-antrian #main .queue {
+    height: 60%;
+    margin-left: 0.5%;
+    justify-content: none;
+    align-items: stretch;
+    margin-bottom: 0.5%;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+.bg-antrian #main .queue .loket {
+    height: 48%;
+    width: 24.5%;
+    background-color: #0067b0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+	flex-wrap: nowrap;
+}
+
+.bg-antrian #main .queue .nama-loket {
+    color: #fff;
+    font-size: 25px;
+	text-align: center;
+}
+
+.bg-antrian #main .queue .nomor {
+    color: #fcff00;
+    font-size: 50px;
+}
+
+.bg-antrian #main .queue .id {
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 25px;
+    text-align: center;
+	width: 100%;
+	word-wrap: break-word;
+}
+
+/*------------------- PMB ------------------------*/
+.bg-antrian #main .active-pmb {
+	height: 60%;
+}
+
+.bg-antrian #main .queue-pmb {
+	height: 40%;
+}
+
+.bg-antrian #main .queue-pmb .loket {
+	height: 100%;
+}

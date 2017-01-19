@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="operatorApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Operator</title>
+    <link rel="stylesheet" href="../public/style/style.css">
+</head>
+<body onload="tanggal()" ng-controller="OperatorController">
+    <ng-view>
+    <script type="text/javascript" src="../public/script/client.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/loginController.js"></script>
+    <script src="../js/controllers/homeController.js"></script>
+    <script src="../js/directives/loginDirective.js"></script>
+    <script src="../js/services/loginService.js"></script>
+    <script src="../js/services/sessionService.js"></script>
+    <script src="../js/services/operatorService.js"></script>
+    <script src="../lib/angular/angular-cookies.js"></script>
+    <script src="../lib/socket.io-1.4.5.js"></script>
+    <script src="../public/script/jquery-1.11.3.min.js"></script>
+    <script>
+    var socket = io("http://localhost:8080/");      
+            var data_antrian=""; 
+                socket.on("selesai",function(data){
+                    data_antrian=data;
+                    document.getElementById("modal-selesai").style.display = 'flex';
+                    $('.box').style.display = 'flex';
+                    document.getElementById("modal-selesai").style.backgroundColor = 'rgba(0,0,0,0.7)';
+            });
+
+        function puas(){
+            console.log(data_antrian);
+            var data = {
+                id:data_antrian.id_antrian, 
+                survey:'ya'
+            }
+            $.ajax({
+                type: "POST",
+                url: base_url+'antrianpmb/survey',
+                data: data,
+                success: function(data){
+                    document.getElementById("modal-selesai").style.display = 'none';
+                    $('.box').style.display = 'none';
+                    //document.getElementById("modal-selesai").style.backgroundColor = 'rgba(0,0,0,0.7)';
+                },
+            });
+        }
+
+        function tidak_puas(){
+            console.log(data_antrian);
+            var data = {
+                id:data_antrian.id_antrian, 
+                survey:'tidak'
+            }
+            $.ajax({
+                type: "POST",
+                url: base_url+'antrianpmb/survey',
+                data: data,
+                success: function(data){
+                     document.getElementById("modal-selesai").style.display = 'none';
+                    $('.box').style.display = 'none';
+                    //document.getElementById("modal-selesai").style.backgroundColor = 'rgba(0,0,0,0.7)';
+                },
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<div id="ambil" class="row" ng-show="ambil">
+    <h1>Ambil Antrian</h1>
+    <div id="button">
+        <button class="btn btn-primary" ng-repeat="data in layanan"
+                style="margin-right: 10px" data="{{data.id_pelayanan}}"
+                ng-click="pilihlayanan(data.id_pelayanan)">{{data.nama_pelayanan}}</button> &nbsp;
+    </div>
+
+</div>
+
+<div id="loket" class="row" ng-show="loket">
+    <h1>Keperluan Anda</h1>
+    <div id="button">
+        <button class="btn btn-primary" ng-repeat="data in loket"
+                style="margin-right: 10px" data="{{data.id_loket}}"
+                ng-click="pilihloket(data.no_loket)">{{data.nama_loket}}</button> &nbsp;
+    </div>
+</div>

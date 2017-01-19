@@ -1,0 +1,47 @@
+<div id="modal-container" class="flex" >
+    <div id="modal">
+
+        <div id="modal-header" class="flex">
+            <p>Layanan {{nama_layanan}}</p>
+        </div>
+        <div id="modal-main" class="flex">
+            <label>No. Antrian anda :</label>
+            <div id="no-antrian">{{noantrian}}</div>
+        </div>
+
+        <div id="modal-footer" class="flex">
+            <a href="#step2" id="exit" class="flex" onclick="tutup()">
+                KEMBALI
+            </a>
+            <a href="#" id="ambil" class="flex" ng-click="simpanantrian()">
+                AMBIL ANTRIAN
+            </a>
+        </div>
+    </div>
+</div>
+
+   <!-- Menu -->
+    <div id="bg-row" class="flex" ng-show="ambil">
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in layanan" data="{{data.id_jenispelayanan}}"
+           ng-click="pilihlayanan(data.id_jenispelayanan,data.nama_pelayanan)">
+            LAYANAN <br> {{data.nama_pelayanan | uppercase}}
+        </a>
+    </div>
+
+    <div id="bg-row2" class="flex" ng-show="pelayanan">
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in data_pelayanan" data="{{data.id_loket}}"
+           ng-click="pilihpelayanan(data.id_pelayanan,data.nama_pelayanan)">{{data.nama_pelayanan | uppercase}}
+        </a>
+    </div>
+
+    <div id="bg-row" class="flex" ng-show="subpelayanan">
+        <a href="" class="menus menu-akademik flex" ng-repeat="data in data_subpelayanan" data="{{data.id_subpelayanan}}"
+           ng-click="pilihsubpelayanan(data.id_subpelayanan,data.nama_subpelayanan)">{{data.nama_subpelayanan | uppercase}}
+        </a>
+    </div>
+
+    <div id="back">
+        <a href="" ng-click="kembali()">
+            <img src="../img/ic_back.png" width="100" alt="back">
+        </a>
+    </div>

@@ -1,0 +1,124 @@
+<div ng-include src="'views/partials/nav.htm'"></div>
+<div class="right_col" role="main">
+  <!-- top tiles -->
+
+  <div class="row" ng-controller="chartcont">
+
+    <p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4> Loket History <small> Rata-rata Waktu Melayani </small> </h4></div><p>
+            <p align="center">Tahun : {{tahunvTerlayani}}</p>
+            <p align="center">Bulan : {{bulanvTerlayani}}</p>
+            <div class="panel-body">
+              <div class="title_right">
+                <div class="form-group top_search">
+                  <div class="input-group">
+                    <input type="text" ng-model="tahunTerlayani" class="form-control" placeholder="Tahun , ex. 2016">
+                    <span class="input-group-btn">
+
+                    </span>
+                    <input type="text" ng-model="bulanTerlayani" class="form-control" placeholder="Bulan , ex. 06">
+                    <span class="input-group-btn">
+                        <button ng-click="SendDataTerlayani()" class="btn btn-default" type="button">Search</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p>{{msgTerlayani}}</p>
+              <canvas id="bar" class="chart chart-bar"
+                chart-data="dataTerlayani" chart-labels="labelsTerlayani" chart-series="seriesTerlayani" chart-colors="colorsTerlayani">
+              </canvas>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4> Loket History <small> mahasiswa terlayani</small> </h4></div><p>
+            <p align="center">Tahun : {{tahunvLoketD}}</p>
+            <p align="center">Bulan : {{bulanvLoketD}}</p>
+            <div class="panel-body">
+              <div class="title_right">
+                <div class="form-group top_search">
+                  <div class="input-group">
+                    <input type="text" ng-model="tahunLoketD" class="form-control" placeholder="Tahun , ex. 2016">
+                    <span class="input-group-btn">
+
+                    </span>
+                    <input type="text" ng-model="bulanLoketD" class="form-control" placeholder="Bulan , ex. 06">
+                    <span class="input-group-btn">
+                        <button ng-click="SendDataLoketD()" class="btn btn-default" type="button">Search</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p>{{msgLoketD}}</p>
+              <canvas id="pie" class="chart chart-pie"
+                chart-data="dataLoketD" chart-labels="labelsLoketD" chart-colors="colorsLoketD">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4> Operator History <small> mahasiswa terlayani</small> </h4></div><p>
+            <p align="center">Tahun : {{tahunv}}</p>
+            <p align="center">Bulan : {{bulanv}}</p>
+            <div class="panel-body">
+              <div class="title_right">
+                <div class="form-group top_search">
+                  <div class="input-group">
+                    <input type="text" ng-model="tahun" class="form-control" placeholder="Tahun , ex. 2016">
+                    <span class="input-group-btn">
+
+                    </span>
+                    <input type="text" ng-model="bulan" class="form-control" placeholder="Bulan , ex. 06">
+                    <span class="input-group-btn">
+                        <button ng-click="SendData()" class="btn btn-default" type="button">Search</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p>{{msg}}</p>
+              <canvas id="bar" class="chart chart-bar"
+                chart-data="data" chart-labels="labels" chart-colors="colors" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4> Pelayanan History <small> mahasiswa terlayani</small> </h4></div><p>
+            <p align="center">Tahun : {{tahunvLoket}}</p>
+            <p align="center">Bulan : {{bulanvLoket}}</p>
+            <div class="panel-body">
+              <div class="title_right">
+                <div class="form-group top_search">
+                  <div class="input-group">
+                    <input type="text" ng-model="tahunLoket" class="form-control" placeholder="Tahun , ex. 2016">
+                    <span class="input-group-btn">
+
+                    </span>
+                    <input type="text" ng-model="bulanLoket" class="form-control" placeholder="Bulan , ex. 06">
+                    <span class="input-group-btn">
+                        <button ng-click="SendDataLoket()" class="btn btn-default" type="button">Search</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p>{{msgLoket}}</p>
+              <canvas id="doughnut" class="chart chart-doughnut"
+                chart-data="dataLoket" chart-labels="labelsLoket" chart-series="seriesLoket" chart-colors="colorsLoket">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/custom.min.js"></script>
